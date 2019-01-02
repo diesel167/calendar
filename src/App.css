@@ -12,6 +12,7 @@ body{
 table{
   padding:50px;
   border-collapse: collapse;
+
 }
 
 td{
@@ -25,12 +26,13 @@ td{
 
 td:hover{
   background-color: #f2f2f2;
+  transition:0.2s ease-in-out;
 }
 
 td:focus-within .numbers p {
   background-color:#ccc;
   outline: none;
-
+  transition:0.2s ease-in-out;
 }
 
 .numbers {
@@ -42,7 +44,6 @@ td:focus-within .numbers p {
 }
 
 .numbers p{
-
   width:30px;
   height:30px;
   line-height:30px;
@@ -58,6 +59,6 @@ td:focus-within .numbers p {
 }
 
 .otherMonth{
-    color:#ccc;
+  color:#ccc;
 }
 
