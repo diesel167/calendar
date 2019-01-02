@@ -1,0 +1,8 @@
+[0102/110621.205:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name prod, discarding value OperaDesktop
+[0102/110621.303:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name ver, discarding value 57.0.3098.106
+[0102/110621.303:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name channel, discarding value Stable
+[0102/110621.303:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name ptype, discarding value renderer
+[0102/110736.109:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name prod, discarding value OperaDesktop
+[0102/110736.109:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name ver, discarding value 57.0.3098.106
+[0102/110736.109:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name channel, discarding value Stable
+[0102/110736.109:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name ptype, discarding value renderer
