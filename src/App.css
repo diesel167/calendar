@@ -28,6 +28,7 @@ table{
 }
 
 td{
+  width:calc(100%/7);
   height:80px;
   padding:0;
   vertical-align:top;
@@ -79,6 +80,17 @@ td:focus-within .numbers p {
 
 .otherMonth{
   color: #969696;
+}
+
+td.holiday{
+  background-color:rgba(145, 0, 48, 0.1);
+}
+
+p.holiday{
+  text-align:left;
+  margin:0;
+  padding-left:5px;
+  background-color: rgba(204, 87, 87, 0.6);
 }
 
 button {

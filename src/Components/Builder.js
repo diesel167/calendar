@@ -1,6 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import $ from 'jquery';
 import CellBuild from './CellBuild.js';
 
 
@@ -42,7 +41,8 @@ class Builder extends React.Component {
                 //loop for draw previous month days and padding current 1st days relative days of week
                 if(i===0&&j<helpDate.getDay()-1){
                     helpOther.setDate(-helpDate.getDay()+2+j);    //
-                    cells.push(<CellBuild date={helpOther.getDate()} isNowDate="numbers otherMonth"/>);
+
+                    cells.push(<CellBuild date={helpOther.getDate()} month={helpOther.getMonth()} isNowDate="numbers otherMonth"/>);
                 }
                 //continue drawing calendar
                 else{
@@ -51,15 +51,17 @@ class Builder extends React.Component {
 
                         //checking for today
                         if(helpDate.getDate()===currentDate.getDate()&&helpDate.getMonth()===currentDate.getMonth()&&helpDate.getFullYear()===currentDate.getFullYear()){
-                            cells.push(<CellBuild date={helpDate.getDate()} isNowDate="numbers nowDate"/>); //join cell to cells container
+
+                            cells.push(<CellBuild date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers nowDate"/>); //join cell to cells container
                         }
                         else{
-                            cells.push(<CellBuild date={helpDate.getDate()} isNowDate="numbers"/>); //join cell to cells container
+
+                            cells.push(<CellBuild date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers"/>); //join cell to cells container
                         }
                     }
                     //next month days
                     else{
-                        cells.push(<CellBuild date={helpDate.getDate()} isNowDate="numbers otherMonth"/>); //join cell to cells container
+                        cells.push(<CellBuild date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers otherMonth"/>); //join cell to cells container
                     }
                     helpDate.setDate(helpDate.getDate()+1);
                 }

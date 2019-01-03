@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Builder from './Components/Builder.js';
-import $ from 'jquery';
+
 
 
 let helpDate = new Date();
