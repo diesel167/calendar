@@ -1,18 +1,30 @@
 body{
   font:14px;
+  padding-top:20px;
 }
 
 
 
 .head:nth-child(2){
-  margin-left:20px;
   font-weight:bold;
+  width:85px;
+  margin-left:5px;
 }
+.head:nth-child(3){
+  margin-right:5px;
+}
+
+div.head{
+  display:inline-block;
+}
+
+
+
+
 
 table{
   padding:50px;
   border-collapse: collapse;
-
 }
 
 td{
@@ -24,15 +36,22 @@ td{
   outline: none;
 }
 
-td:hover{
-  background-color: #f2f2f2;
-  transition:0.2s ease-in-out;
+tr td:nth-child(6){
+    background-color: rgba(145, 0, 48, 0.1);
+}
+tr td:nth-child(7){
+    background-color:rgba(145, 0, 48, 0.1);
+}
+
+tr td:nth-child(n):hover{
+  background-color: #dedede;
+  transition:0.1s ease-in-out;
 }
 
 td:focus-within .numbers p {
-  background-color:#ccc;
+  background-color: rgb(201, 201, 201);
   outline: none;
-  transition:0.2s ease-in-out;
+  transition:0.3s ease-in-out;
 }
 
 .numbers {
@@ -59,6 +78,29 @@ td:focus-within .numbers p {
 }
 
 .otherMonth{
-  color:#ccc;
+  color: #969696;
 }
 
+button {
+  border-radius:10px;
+  color:#fff;
+  width:25px;
+  border: 0;
+  font-weight:200;
+  text-transform:uppercase;
+  cursor:pointer;
+  text-decoration:none;
+}
+button:hover { background: rgb(53, 167, 110); }
+
+button:active {
+  background: rgb(33,147,90);
+  box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+button:focus {outline:none !important;}
+
+
+thead{
+  width:200px;
+}

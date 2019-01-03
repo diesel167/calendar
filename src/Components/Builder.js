@@ -31,7 +31,7 @@ class Builder extends React.Component {
         helpOther.setDate(1);
         let table=[];    //create table container
         let rows=[];    //create rows container
-        console.log(helpDate.getDay()-1);
+
         //outer loop for rows creating (filling rows container)
         for(let i=0;i<6;i++){
             let cells=[];   //create empty cells container
@@ -48,8 +48,9 @@ class Builder extends React.Component {
                 else{
                     //current month
                     if(helpDate.getMonth()===data.getMonth()){
+
                         //checking for today
-                        if(helpDate.getDate()===currentDate.getDate()&&helpDate.getMonth()===currentDate.getMonth()){
+                        if(helpDate.getDate()===currentDate.getDate()&&helpDate.getMonth()===currentDate.getMonth()&&helpDate.getFullYear()===currentDate.getFullYear()){
                             cells.push(<CellBuild date={helpDate.getDate()} isNowDate="numbers nowDate"/>); //join cell to cells container
                         }
                         else{
@@ -67,17 +68,17 @@ class Builder extends React.Component {
             rows.push(<tr>{cells}</tr>);    //join filled cells  container to rows container (join a row)
         }
 
-        table.push(<thead><span className="head">{months[data.getMonth()]}</span><span className="head">{data.getFullYear()}</span><button className="decrease" onClick=
+        table.push(<thead><button className="decrease" onClick=
             {() =>
             {
                 data.setMonth(data.getMonth()-1);
                 this.setState({dataState:data});
-            }}>-</button><button className="increase" onClick=
+            }}>&larr;</button><div className="head">{months[data.getMonth()]}</div><div className="head">{data.getFullYear()}</div><button className="increase" onClick=
             {() =>
             {
                 data.setMonth(data.getMonth()+1);
                 this.setState({dataState:data});
-            }}>+</button></thead>);   //make header of the table
+            }}>&rarr;</button></thead>);   //make header of the table
         table.push(<table className="col-lg-12 col-md-12 col-xs-12"><tbody>{rows}</tbody></table>);  //join filled rows container to table
 
         return table;
