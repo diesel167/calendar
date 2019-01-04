@@ -70,7 +70,7 @@ class Builder extends React.Component {
             rows.push(<tr>{cells}</tr>);    //join filled cells  container to rows container (join a row)
         }
 
-        table.push(<thead><button className="decrease" onClick=
+        table.push(<table className="col-lg-12 col-md-12 col-xs-12"><thead><tr><th colSpan={2}><button className="decrease" onClick=
             {() =>
             {
                 data.setMonth(data.getMonth()-1);
@@ -80,15 +80,24 @@ class Builder extends React.Component {
             {
                 data.setMonth(data.getMonth()+1);
                 this.setState({dataState:data});
-            }}>&rarr;</button></thead>);   //make header of the table
-        table.push(<table className="col-lg-12 col-md-12 col-xs-12"><tbody>{rows}</tbody></table>);  //join filled rows container to table
+            }}>&rarr;</button></th></tr></thead><tbody>{rows}</tbody></table>);  //join filled rows  container to table and make header
 
         return table;
     };
 
     render() {
         return (
-            <div className="container">{this.createTable(this.state.dataState)}</div>
+            <div className="container"><div className="calendar">{this.createTable(this.state.dataState)}</div>
+                <form className="form">
+                    <fieldset>
+                        <legend>Вход на сайт</legend>
+                        <p>Логин: <input name="login"/></p>
+                        <p>Пароль: <input type="password" name="pass"/></p>
+                        <p><input type="submit" value="Вход"/></p>
+                    </fieldset>
+                </form>
+            </div>
+
         )
     }
 }
