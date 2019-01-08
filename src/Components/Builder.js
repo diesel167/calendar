@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import CellBuild from './CellBuild.js';
-
+import $ from 'jquery';
 
 
 
@@ -18,7 +18,7 @@ class Builder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataState: this.props.helpDate,
+            dataState: this.props.helpDate,   //set month to build and display
         };
     }
 
@@ -70,7 +70,7 @@ class Builder extends React.Component {
             rows.push(<tr>{cells}</tr>);    //join filled cells  container to rows container (join a row)
         }
 
-        table.push(<table className="col-lg-12 col-md-12 col-xs-12"><thead><tr><th colSpan={2}><button className="decrease" onClick=
+        table.push(<table className="main col-lg-12 col-md-12 col-xs-12"><thead><tr><th colSpan={2}><button className="decrease" onClick=
             {() =>
             {
                 data.setMonth(data.getMonth()-1);
@@ -88,14 +88,23 @@ class Builder extends React.Component {
     render() {
         return (
             <div className="container"><div className="calendar">{this.createTable(this.state.dataState)}</div>
-                <form className="form">
-                    <fieldset>
-                        <legend>Вход на сайт</legend>
-                        <p>Логин: <input name="login"/></p>
-                        <p>Пароль: <input type="password" name="pass"/></p>
-                        <p><input type="submit" value="Вход"/></p>
-                    </fieldset>
-                </form>
+                <div className="form">
+                    <button onClick={() => {
+                        $(function () {
+                            $('table').css('display', 'table');
+                            $('.form').css('display', 'none');
+                        })
+                        }}>&larr;</button>
+                    <form>
+                        <fieldset>
+                            <legend>Вход на сайт</legend>
+                            <p>Логин: <input name="login"/></p>
+                            <p>Пароль: <input type="password" name="pass"/></p>
+                            <p><input type="submit" value="Вход"/></p>
+                        </fieldset>
+                    </form>
+                </div>
+
             </div>
 
         )
@@ -104,3 +113,14 @@ class Builder extends React.Component {
 
 
 export default Builder;
+
+
+/*<div className="dayEvents">
+    <table>
+        <thead>
+        </thead>
+        <tbody>
+            <tr><td></td></tr>
+        </tbody>
+    </table>
+</div>*/

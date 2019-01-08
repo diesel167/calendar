@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import $ from 'jquery';
 
 //holidays list
 
@@ -44,7 +44,13 @@ class CellBuild extends React.Component {
     render(){
 
         //do default cell value if not holiday
-        let cell=<td tabIndex="0" ><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p></div></td>;
+        let cell=<td tabIndex="0" onClick={() => {
+            $(function () {
+                $('table').css('display','none');
+                $('.form').css('display','block');
+            })
+        }
+        }><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p></div></td>;
 
         //check for holiday day
         this.state.holidaysState.map(function(holiday){
@@ -53,7 +59,13 @@ class CellBuild extends React.Component {
 
             //if current day is holiday change a cell value for this day in calendar
             if(tempDate.getMonth()===this.props.month&&tempDate.getDate()===this.props.date ){
-                cell=<td tabIndex="0" className="holiday"><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p></div><p className="holiday">{holiday.name}</p></td>;
+                cell=<td tabIndex="0" onClick={() => {
+                    $(function () {
+                        $('table').css('display','none');
+                        $('.form').css('display','block');
+                    })
+                }
+                } className="holiday"><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p></div><p className="holiday">{holiday.name}</p></td>;
             }
 
         },this);  //give CellBuilder as the context of map-function

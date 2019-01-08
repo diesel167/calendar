@@ -1,6 +1,7 @@
 body{
   font:14px;
   padding-top:20px;
+  position:relative;
 }
 
 
@@ -22,12 +23,12 @@ div.head{
 
 
 
-table{
+table.main{
   padding:50px;
   border-collapse: collapse;
 }
 
-td{
+.main td{
   width:calc(100%/7);
   height:80px;
   padding:0;
@@ -38,25 +39,25 @@ td{
 
 }
 
-tr td:nth-child(6){
+.main tr td:nth-child(6){
     background-color: rgba(145, 0, 48, 0.1);
 }
-tr td:nth-child(7){
+.main tr td:nth-child(7){
     background-color:rgba(145, 0, 48, 0.1);
 }
 
-tr td:nth-child(n):hover{
+.main tr td:nth-child(n):hover{
   background-color: #dedede;
   transition:0.1s ease-in-out;
 }
 
-td:focus-within .numbers p {
+.main td:focus-within .numbers p {
   background-color: rgb(201, 201, 201);
   outline: none;
   transition:0.3s ease-in-out;
 }
 
-td:focus-within .nowDate p {
+.main td:focus-within .nowDate p {
   background-color: #c70000;
 }
 
@@ -126,3 +127,12 @@ button:focus {outline:none !important;}
 thead{
   width:200px;
 }
+
+.form{
+  display:none;
+  position:absolute;
+}
+
+/*.dayEvents{
+
+}*/
