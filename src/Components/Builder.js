@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import CellBuild from './CellBuild.js';
+import DayEventBuilder from './DayEventBuilder.js';
 import $ from 'jquery';
 
 
@@ -104,6 +105,7 @@ class Builder extends React.Component {
                         </fieldset>
                     </form>
                 </div>
+                <div className="paddings"><DayEventBuilder/></div>
 
             </div>
 
@@ -115,12 +117,3 @@ class Builder extends React.Component {
 export default Builder;
 
 
-/*<div className="dayEvents">
-    <table>
-        <thead>
-        </thead>
-        <tbody>
-            <tr><td></td></tr>
-        </tbody>
-    </table>
-</div>*/

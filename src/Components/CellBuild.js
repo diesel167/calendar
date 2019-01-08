@@ -46,8 +46,8 @@ class CellBuild extends React.Component {
         //do default cell value if not holiday
         let cell=<td tabIndex="0" onClick={() => {
             $(function () {
-                $('table').css('display','none');
-                $('.form').css('display','block');
+                $('table.main').css('opacity','.5');
+                $('table.dayEvents').css('display','table');
             })
         }
         }><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p></div></td>;
@@ -61,8 +61,8 @@ class CellBuild extends React.Component {
             if(tempDate.getMonth()===this.props.month&&tempDate.getDate()===this.props.date ){
                 cell=<td tabIndex="0" onClick={() => {
                     $(function () {
-                        $('table').css('display','none');
-                        $('.form').css('display','block');
+                        $('table.main').css('display','none');
+                        $('table.dayEvents').css('display','table');
                     })
                 }
                 } className="holiday"><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p></div><p className="holiday">{holiday.name}</p></td>;
