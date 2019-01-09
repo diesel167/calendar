@@ -131,6 +131,11 @@ thead{
 .form{
   display:none;
   position:absolute;
+  top:10%;
+  background:white;
+  box-shadow:0 0 20px 1px black;
+  height:40%;
+  padding:20px;
 }
 
 table.dayEvents {

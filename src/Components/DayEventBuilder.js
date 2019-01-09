@@ -21,6 +21,21 @@ let events = [
 
 
 class DayEventBuilder extends React.Component {
+
+    /*handleDescriptionChange: function(e) {
+        this.setState({description: e.target.value});
+    };
+
+    handleNameChange: function(e) {
+        this.setState({name: e.target.value});
+    };*/
+    constructor(props) {
+        super(props);
+        this.state = {
+            day:this.props.day,             //take actual day and month of the clicked cell from CellBuild
+            month:this.props.month,
+        };
+    }
     render(){
         let table=[];    //create table container
         let rows=[];    //create rows container
@@ -40,7 +55,13 @@ class DayEventBuilder extends React.Component {
                 }
 
                 if(skip<=0){   //if we finished skip <td> adding while event was
-                    cells.push(<td></td>);
+                    cells.push(<td onClick={() => {
+                        $(function () {
+                            $('table.main').css('opacity','.3');
+                            $('table.dayEvents').css('opacity','.5');
+                            $('.form').css('display', 'block');
+                        })
+                    }}/>);
                 }
                 --skip;
 
@@ -48,7 +69,8 @@ class DayEventBuilder extends React.Component {
         }
 
         //create table and create exit button from events list
-        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th></th><th><button onClick={() => {
+        console.log('DayEventBuilder state.day ='+this.state.day);
+        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th>{this.state.day}</th><th><button onClick={() => {
             $(function () {
                 $('table.main').css('opacity','1');
                 $('table.dayEvents').css('display','none');
@@ -56,7 +78,34 @@ class DayEventBuilder extends React.Component {
         }
         }>&#215;</button></th></tr></thead><tbody>{rows}</tbody></table>);
 
-        return table;
+
+        return (<div>
+                    <div>{table}</div>
+                    <div className="form col-lg-6 col-md-6 col-sm-8 col-xs-8">
+                        <button onClick={() => {
+                            $(function () {
+                                $('table').css('display', 'table');
+                                $('.form').css('display', 'none');
+                                $('table.dayEvents').css('opacity','1');
+                                $('table.main').css('opacity','.5');
+                            })
+                        }}>&larr;</button>
+                        <form>
+                            <fieldset>
+                                <select className="form-control">
+                                    <option value="one">One</option>
+                                    <option value="two">Two</option>
+                                    <option value="three">Three</option>
+                                    <option value="four">Four</option>
+                                    <option value="five">Five</option>
+                                </select>
+                                <legend>Add the event</legend>
+                                <p>Description <input name="login"/></p>
+                                <p><input type="submit" value="Add"/></p>
+                            </fieldset>
+                        </form>
+                    </div>
+            </div>);
     }
 }
 

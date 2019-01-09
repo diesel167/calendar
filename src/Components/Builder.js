@@ -19,9 +19,14 @@ class Builder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataState: this.props.helpDate,   //set month to build and display
+            dataState: this.props.helpDate,   //set date to build and display
         };
     }
+
+   /* //help function to control date parameters in cell which is clicked
+    clickCell=x=>{
+        this.setState({day:x});
+    };              */
 
     createTable =(data)=>{
 
@@ -32,6 +37,9 @@ class Builder extends React.Component {
         let table=[];    //create table container
         let rows=[];    //create rows container
 
+
+
+
         //outer loop for rows creating (filling rows container)
         for(let i=0;i<6;i++){
             let cells=[];   //create empty cells container
@@ -41,13 +49,13 @@ class Builder extends React.Component {
 
                 //loop for draw previous month days and padding current 1st days relative days of week
                 if(i===0&&j<helpDate.getDay()-1){
-                    helpOther.setDate(-helpDate.getDay()+2+j);    //
+                    helpOther.setDate(-helpDate.getDay()+2+j);
 
                     cells.push(<CellBuild date={helpOther.getDate()} month={helpOther.getMonth()} isNowDate="numbers otherMonth"/>);
                 }
                 //continue drawing calendar
                 else{
-                    //current month
+                    //if current month
                     if(helpDate.getMonth()===data.getMonth()){
 
                         //checking for today
@@ -57,12 +65,13 @@ class Builder extends React.Component {
                         }
                         else{
 
-                            cells.push(<CellBuild date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers"/>); //join cell to cells container
+                            cells.push(<CellBuild clickCell={this.clickCell} date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers" />); //join cell to cells container
+
                         }
                     }
                     //next month days
                     else{
-                        cells.push(<CellBuild date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers otherMonth"/>); //join cell to cells container
+                        cells.push(<CellBuild date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers otherMonth" />); //join cell to cells container
                     }
                     helpDate.setDate(helpDate.getDate()+1);
                 }
@@ -71,7 +80,7 @@ class Builder extends React.Component {
             rows.push(<tr>{cells}</tr>);    //join filled cells  container to rows container (join a row)
         }
 
-        table.push(<table className="main col-lg-12 col-md-12 col-xs-12"><thead><tr><th colSpan={2}><button className="decrease" onClick=
+        table.push(<table className="main col-lg-12 col-md-12 col-sm-12 col-xs-12"><thead><tr><th colSpan={2}><button className="decrease" onClick=
             {() =>
             {
                 data.setMonth(data.getMonth()-1);
@@ -86,29 +95,14 @@ class Builder extends React.Component {
         return table;
     };
 
+
+
     render() {
         return (
-            <div className="container"><div className="calendar">{this.createTable(this.state.dataState)}</div>
-                <div className="form">
-                    <button onClick={() => {
-                        $(function () {
-                            $('table').css('display', 'table');
-                            $('.form').css('display', 'none');
-                        })
-                        }}>&larr;</button>
-                    <form>
-                        <fieldset>
-                            <legend>Вход на сайт</legend>
-                            <p>Логин: <input name="login"/></p>
-                            <p>Пароль: <input type="password" name="pass"/></p>
-                            <p><input type="submit" value="Вход"/></p>
-                        </fieldset>
-                    </form>
-                </div>
-                <div className="paddings"><DayEventBuilder/></div>
-
+            <div className="container">
+                <div className="calendar">{this.createTable(this.state.dataState)}</div>
+                <DayEventBuilder day={this.state.day}/>
             </div>
-
         )
     }
 }
