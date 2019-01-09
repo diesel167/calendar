@@ -82,20 +82,4 @@ class CellBuild extends React.Component {
 
 export default CellBuild;
 
-/*{() => {
-                    $(function () {
-                        $('table.main').css('opacity','.5');
-                        $('table.dayEvents').css('display','table');
-                    })
-                }
-                }*/
-
-/*{() => {
-                    $(function () {
-                        console.log(this);
-                        $('table.main').css('opacity','.5');
-                        $('table.dayEvents').css('display','table');
-                    })
-                }
-                }*/
 

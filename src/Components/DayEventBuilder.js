@@ -70,7 +70,7 @@ class DayEventBuilder extends React.Component {
 
         //create table and create exit button from events list
         console.log('DayEventBuilder state.day ='+this.state.day);
-        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th>{this.state.day}</th><th><button onClick={() => {
+        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th></th><th><button onClick={() => {
             $(function () {
                 $('table.main').css('opacity','1');
                 $('table.dayEvents').css('display','none');

@@ -101,7 +101,7 @@ class Builder extends React.Component {
         return (
             <div className="container">
                 <div className="calendar">{this.createTable(this.state.dataState)}</div>
-                <DayEventBuilder day={this.state.day}/>
+                <DayEventBuilder/>
             </div>
         )
     }
