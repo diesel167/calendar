@@ -10,25 +10,14 @@ let events = [
         time1:"15:00",
         time2:"19:00"
     },
-   /* {id:1,
-        date:"2019.02.05",
-        name:"Event 2 for this day",
-        time1:"11:00",
-        time2:"12:00"
-    }*/
  ];
 
 
 
 class DayEventBuilder extends React.Component {
 
-    /*handleDescriptionChange: function(e) {
-        this.setState({description: e.target.value});
-    };
 
-    handleNameChange: function(e) {
-        this.setState({name: e.target.value});
-    };*/
+
     constructor(props) {
         super(props);
         this.state = {
@@ -41,7 +30,7 @@ class DayEventBuilder extends React.Component {
         let rows=[];    //create rows container
         let skip=0;   //skip <td> adding if needed
 
-        //create table
+        //build table
         for (let i=0;i<25;i++){
             let cells=[];   //create empty cells container
             cells.push(<td>{i+':00'}</td>);
@@ -70,7 +59,7 @@ class DayEventBuilder extends React.Component {
 
         //create table and create exit button from events list
         console.log('DayEventBuilder state.day ='+this.state.day);
-        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th></th><th><button onClick={() => {
+        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th>{this.state.day}</th><th><button onClick={() => {
             $(function () {
                 $('table.main').css('opacity','1');
                 $('table.dayEvents').css('display','none');
@@ -110,3 +99,13 @@ class DayEventBuilder extends React.Component {
 }
 
 export default DayEventBuilder;
+
+
+
+/*handleDescriptionChange: function(e) {
+       this.setState({description: e.target.value});
+   };
+
+   handleNameChange: function(e) {
+       this.setState({name: e.target.value});
+   };*/

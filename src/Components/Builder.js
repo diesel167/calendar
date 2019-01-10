@@ -23,10 +23,10 @@ class Builder extends React.Component {
         };
     }
 
-   /* //help function to control date parameters in cell which is clicked
+    //help function to control date parameters in cell which is clicked
     clickCell=x=>{
         this.setState({day:x});
-    };              */
+    };
 
     createTable =(data)=>{
 
@@ -101,7 +101,7 @@ class Builder extends React.Component {
         return (
             <div className="container">
                 <div className="calendar">{this.createTable(this.state.dataState)}</div>
-                <DayEventBuilder/>
+                <DayEventBuilder day={this.state.day}/>
             </div>
         )
     }
