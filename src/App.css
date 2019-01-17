@@ -150,13 +150,18 @@ table.dayEvents {
 }
 
 
-
-
 .dayEvents thead tr th:nth-child(2){
     text-align:right;
+    position:relative;
 }
 
+.dayEvents thead tr th:nth-child(2) div{
+    display:inline-block;
+}
 
+.dayEvents thead tr th{
+    padding:5px;
+}
 
 
 .dayEvents td{
@@ -194,4 +199,15 @@ table.dayEvents {
 td.setEvent {
     border-left: 3px solid red;
 }
+
+.eventDate{
+    display:inline-block;
+    position:absolute;
+    left:40%;
+}
+.eventDate>div:nth-child(1){
+    padding-right:10px;
+    font-weight:normal !important;
+}
+
 

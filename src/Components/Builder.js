@@ -19,13 +19,14 @@ class Builder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataState: this.props.helpDate,   //set date to build and display
+            dataState: props.helpDate,   //set date to build and display
         };
     }
 
     //help function to control date parameters in cell which is clicked
-    clickCell=x=>{
+    clickCell=(x,y)=>{
         this.setState({day:x});
+        this.setState({month:y});
     };
 
     createTable =(data)=>{
@@ -61,7 +62,7 @@ class Builder extends React.Component {
                         //checking for today
                         if(helpDate.getDate()===currentDate.getDate()&&helpDate.getMonth()===currentDate.getMonth()&&helpDate.getFullYear()===currentDate.getFullYear()){
 
-                            cells.push(<CellBuild date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers nowDate"/>); //join cell to cells container
+                            cells.push(<CellBuild clickCell={this.clickCell} date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers nowDate"/>); //join cell to cells container
                         }
                         else{
 
@@ -98,10 +99,11 @@ class Builder extends React.Component {
 
 
     render() {
+
         return (
             <div className="container">
                 <div className="calendar">{this.createTable(this.state.dataState)}</div>
-                <DayEventBuilder day={this.state.day}/>
+                <DayEventBuilder day={this.state.day} month={months[this.state.month]}/>
             </div>
         )
     }

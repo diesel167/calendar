@@ -26,6 +26,7 @@ class DayEventBuilder extends React.Component {
         };
     }
     render(){
+
         let table=[];    //create table container
         let rows=[];    //create rows container
         let skip=0;   //skip <td> adding if needed
@@ -58,8 +59,8 @@ class DayEventBuilder extends React.Component {
         }
 
         //create table and create exit button from events list
-        console.log('DayEventBuilder state.day ='+this.state.day);
-        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th>{this.state.day}</th><th><button onClick={() => {
+        //console.log('DayEventBuilder state.day ='+this.state.day);
+        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th></th><th><div className='eventDate'><div>{this.props.month}</div><div>{this.props.day}</div></div><button onClick={() => {
             $(function () {
                 $('table.main').css('opacity','1');
                 $('table.dayEvents').css('display','none');

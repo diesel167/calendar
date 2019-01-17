@@ -44,10 +44,14 @@ class CellBuild extends React.Component {
     render(){
         //do default cell value if not holiday
         let cell=<td tabIndex="0" onClick={() => {
+            //this.setState({day:this.props.date});    //set day in state to render actual DayEventBuilderComponent
+            //this.setState({month:this.props.month});    //set day in state to render actual DayEventBuilderComponent
+            this.props.clickCell(this.props.date,this.props.month);
             $(function () {
                 $('table.main').css('opacity','.5');
                 $('table.dayEvents').css('display','table');
             })
+
         }
         }><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p></div></td>;
 
@@ -59,9 +63,7 @@ class CellBuild extends React.Component {
             //if current day is holiday change a cell value for this day in calendar
             if(tempDate.getMonth()===this.props.month&&tempDate.getDate()===this.props.date ){
                 cell=<td tabIndex="0" onClick={() => {
-                    this.setState({day:this.props.date});    //set day in state to render actual DayEventBuilderComponent
-                    this.setState({month:this.props.month});    //set day in state to render actual DayEventBuilderComponent
-                    this.props.clickCell(this.state.day);
+                    this.props.clickCell(this.props.date,this.props.month);
                     $(function () {
                         $('table.main').css('opacity','.5');
                         $('table.dayEvents').css('display','table');
