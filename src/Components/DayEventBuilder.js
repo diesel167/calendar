@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import EventForm from './EventForm.js';
 import $ from 'jquery';
 
 
@@ -16,15 +17,20 @@ let events = [
 
 class DayEventBuilder extends React.Component {
 
-
-
     constructor(props) {
         super(props);
         this.state = {
             day:this.props.day,             //take actual day and month of the clicked cell from CellBuild
             month:this.props.month,
+            timeStart:'00:00',
         };
+        this.selectedTime = this.selectedTime.bind(this);
     }
+
+    selectedTime=(x)=>{
+        this.setState({timeStart:x})
+    };
+
     render(){
 
         let table=[];    //create table container
@@ -34,27 +40,32 @@ class DayEventBuilder extends React.Component {
         //build table
         for (let i=0;i<25;i++){
             let cells=[];   //create empty cells container
+
+            //left cell with time in row
             cells.push(<td>{i+':00'}</td>);
 
+            //if we met the time of beginning event => we draw event another color and set skip var for skipping row drawing
+            if((i+':00')===events[0].time1){
+                let rowspan = events[0].time2.substring(0, 2)-events[0].time1.substring(0, 2);   //calculate how long will the event be
+                cells.push(<td rowSpan={rowspan} className="setEvent">{events[0].name}</td>);
+                skip=rowspan;   //set skip counter
+            }
 
-
-                if((i+':00')===events[0].time1){
-                    let rowspan = events[0].time2.substring(0, 2)-events[0].time1.substring(0, 2);   //calculate how long will the event be
-                    cells.push(<td rowSpan={rowspan} className="setEvent">{events[0].name}</td>);
-                    skip=rowspan;   //set skip counter
-                }
-
-                if(skip<=0){   //if we finished skip <td> adding while event was
-                    cells.push(<td onClick={() => {
-                        $(function () {
-                            $('table.main').css('opacity','.3');
-                            $('table.dayEvents').css('opacity','.5');
-                            $('.form').css('display', 'block');
-                        })
-                    }}/>);
-                }
-                --skip;
-
+            //draw empty right cell
+            if(skip<=0){   //if we finished skip <td> adding while event was
+                cells.push(<td onClick={() => {    ///////////////////////////////////////////////////////////
+                    //this.setState({timeStart:i+':00'});
+                    this.selectedTime(i+':00');
+                    console.log(this.state.timeStart);
+                    //console.log(i+':00');
+                    $(function () {
+                        $('table.main').css('opacity','.3');
+                        $('table.dayEvents').css('opacity','.5');
+                        $('.form').css('display', 'block');
+                    })
+                }}/>);
+            }
+            --skip;
             rows.push(<tr>{cells}</tr>);
         }
 
@@ -71,30 +82,7 @@ class DayEventBuilder extends React.Component {
 
         return (<div>
                     <div>{table}</div>
-                    <div className="form col-lg-6 col-md-6 col-sm-8 col-xs-8">
-                        <button onClick={() => {
-                            $(function () {
-                                $('table').css('display', 'table');
-                                $('.form').css('display', 'none');
-                                $('table.dayEvents').css('opacity','1');
-                                $('table.main').css('opacity','.5');
-                            })
-                        }}>&larr;</button>
-                        <form>
-                            <fieldset>
-                                <select className="form-control">
-                                    <option value="one">One</option>
-                                    <option value="two">Two</option>
-                                    <option value="three">Three</option>
-                                    <option value="four">Four</option>
-                                    <option value="five">Five</option>
-                                </select>
-                                <legend>Add the event</legend>
-                                <p>Description <input name="login"/></p>
-                                <p><input type="submit" value="Add"/></p>
-                            </fieldset>
-                        </form>
-                    </div>
+                    <EventForm month={this.props.month} day={this.props.day} timeStart={this.state.timeStart}/>
             </div>);
     }
 }
