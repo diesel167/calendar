@@ -134,7 +134,7 @@ thead{
   top:10%;
   background:white;
   box-shadow:0 0 20px 1px black;
-  height:40%;
+  /*height:40%;*/
   padding:20px;
 }
 
@@ -209,5 +209,6 @@ td.setEvent {
     padding-right:10px;
     font-weight:normal !important;
 }
+
 
 
