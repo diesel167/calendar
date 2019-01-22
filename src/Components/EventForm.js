@@ -2,18 +2,20 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import $ from 'jquery';
 
-let events=[];
+//let events=[];
 let i=false;   //helper variable to getDerivedStateFromProps work only once, cause state.time1 will changes
                 // and will !==props.timeStart (condition in  getDerivedStateFromProps)
-class EventForm extends React.Component {
 
+class EventForm extends React.Component {
+    monthNum;
     constructor() {
         super();
         this.state = {
             i:false,
             task: '',
             time1:'00:00',
-            time2:'00:00'
+            time2:'00:00',
+
         };
         this.onTaskChange = this.onTaskChange.bind(this);
         this.onTime1Change = this.onTime1Change.bind(this);
@@ -21,16 +23,12 @@ class EventForm extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-
     //if new props will be, this method will be called again
     static getDerivedStateFromProps(props, state) {
 
-
-
         if(state.time1 !== props.timeStart && i===false) {
             i=true;
-            console.log('state.time1='+state.time1);
-            console.log('props.timeStart='+props.timeStart);
+
             return {
                 time1: props.timeStart,   //set time1, time2 state
                 time2: props.timeStart
@@ -46,16 +44,25 @@ class EventForm extends React.Component {
     }
 
     onSubmit(event){
+        //initialize localstorage
+        if (!localStorage.getItem("myEl")){
+            //очищаем все хранилище
+            localStorage.clear();
+            let events=[];
+            localStorage.setItem("myEl", JSON.stringify(events));
+        }
+
+        let temp=JSON.parse(localStorage.getItem("myEl"));
         let el ={
-            month:this.props.month,
-            day:this.props.day,
+            date:'2019.'+this.props.monthNum+'.'+this.props.day,
             task:this.state.task.slice(),
             time1:this.state.time1.slice(),
             time2:this.state.time2.slice()
         };
-        events.push(el);
+        temp.push(el);
 
-        console.log(events);
+        localStorage.setItem("myEl", JSON.stringify(temp)); //запишем его в хранилище по ключу "myKey"
+       //events.push(el);
         event.preventDefault();
     }
 
@@ -64,7 +71,6 @@ class EventForm extends React.Component {
     }
 
     onTime1Change(event){
-        console.log(event.target.value);
         this.setState({time1: event.target.value});
     }
 
@@ -84,6 +90,7 @@ class EventForm extends React.Component {
                         $('table.main').css('opacity','.5');
                     })
                 }}>&larr;</button>
+                <h1>Create task</h1>
                 <form onSubmit={this.onSubmit}>
                     <p><label><input type="time" step="3600" name="time1" value={this.addZero(this.state.time1)}
                                      onChange={this.onTime1Change}/></label>
@@ -91,8 +98,8 @@ class EventForm extends React.Component {
                                       onChange={this.onTime2Change}/></label></p>
 
 
-                    <textarea name="com" rows="7" onChange={this.onTaskChange}  value={this.state.task}/>
-                    <p><input type="submit" value="Submit" /></p>
+                    <textarea className="tasktext" name="com" rows="3" onChange={this.onTaskChange}  value={this.state.task}/>
+                    <p><input className="submitButton" type="submit" value="Submit" /></p>
                 </form>
             </div>
         );
@@ -102,5 +109,3 @@ class EventForm extends React.Component {
 export default EventForm;
 
 
-/*<p><label> Task: <input type="text" rows="5" name="task" value={this.state.task}
-                                          onChange={this.onTaskChange}/></label></p>*/

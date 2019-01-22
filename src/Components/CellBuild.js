@@ -44,8 +44,6 @@ class CellBuild extends React.Component {
     render(){
         //do default cell value if not holiday
         let cell=<td tabIndex="0" onClick={() => {
-            //this.setState({day:this.props.date});    //set day in state to render actual DayEventBuilderComponent
-            //this.setState({month:this.props.month});    //set day in state to render actual DayEventBuilderComponent
             this.props.clickCell(this.props.date,this.props.month);
             $(function () {
                 $('table.main').css('opacity','.5');

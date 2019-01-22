@@ -138,6 +138,10 @@ thead{
   padding:20px;
 }
 
+.form button{
+    margin-bottom:5px;
+}
+
 table.dayEvents {
     background:white;
     display:none;
@@ -177,6 +181,7 @@ table.dayEvents {
     font-size:10px;
     vertical-align:top;
     text-align:right;
+    width:50px;
 }
 
 .dayEvents tbody tr td:nth-child(2){
@@ -209,6 +214,30 @@ td.setEvent {
     padding-right:10px;
     font-weight:normal !important;
 }
+
+.tasktext{
+    width:100%;
+}
+
+
+.submitButton {
+    border-radius:10px;
+    color:#fff;
+    width:80px;
+    border: 0;
+    font-weight:200;
+    text-transform:uppercase;
+    cursor:pointer;
+    text-decoration:none;
+}
+.submitButton:hover { background: rgb(53, 167, 110); }
+
+.submitButton:active {
+    background: rgb(33,147,90);
+    box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+.submitButton:focus {outline:none !important;}
 
 
 

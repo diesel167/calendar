@@ -4,14 +4,14 @@ import EventForm from './EventForm.js';
 import $ from 'jquery';
 
 
-let events = [
+/*let events = [
     {id:0,
         date:"2019.01.20",
-        name:"Event 1 for this day",
+        task:"Event 1 for this day",
         time1:"15:00",
         time2:"19:00"
     },
- ];
+ ];*/
 
 
 
@@ -23,6 +23,7 @@ class DayEventBuilder extends React.Component {
             day:this.props.day,             //take actual day and month of the clicked cell from CellBuild
             month:this.props.month,
             timeStart:'00:00',
+            storage:JSON.parse(localStorage.getItem("myEl"))
         };
         this.selectedTime = this.selectedTime.bind(this);
     }
@@ -31,25 +32,48 @@ class DayEventBuilder extends React.Component {
         this.setState({timeStart:x})
     };
 
+
+    //if new props will be, this method will be called again
+    static getDerivedStateFromProps(props, state) {
+
+        if(state.storage !== JSON.parse(localStorage.getItem("myEl"))) {
+            return {
+                storage:JSON.parse(localStorage.getItem("myEl"))
+            };
+        }
+        // Return null to indicate no change to state.
+        return null;
+    }
+
     render(){
 
         let table=[];    //create table container
         let rows=[];    //create rows container
         let skip=0;   //skip <td> adding if needed
-
         //build table
         for (let i=0;i<25;i++){
             let cells=[];   //create empty cells container
 
             //left cell with time in row
             cells.push(<td>{i+':00'}</td>);
-
+/*
             //if we met the time of beginning event => we draw event another color and set skip var for skipping row drawing
             if((i+':00')===events[0].time1){
                 let rowspan = events[0].time2.substring(0, 2)-events[0].time1.substring(0, 2);   //calculate how long will the event be
-                cells.push(<td rowSpan={rowspan} className="setEvent">{events[0].name}</td>);
+                cells.push(<td rowSpan={rowspan} className="setEvent">{events[0].task}</td>);
                 skip=rowspan;   //set skip counter
             }
+*/
+            if(this.state.storage){
+                this.state.storage.map((event)=>{
+                    if((i+':00')===event.time1){
+                        let rowspan = event.time2.substring(0, event.time2.length-3)-event.time1.substring(0, event.time1.length-3);   //calculate how long will the event be
+                        cells.push(<td rowSpan={rowspan} className="setEvent">{event.task}</td>);
+                        skip=rowspan;   //set skip counter
+                    }
+                },this);
+            }
+
 
             //draw empty right cell
             if(skip<=0){   //if we finished skip <td> adding while event was
@@ -78,11 +102,11 @@ class DayEventBuilder extends React.Component {
             })
         }
         }>&#215;</button></th></tr></thead><tbody>{rows}</tbody></table>);
-
+        console.log(this.state.storage);
 
         return (<div>
                     <div>{table}</div>
-                    <EventForm month={this.props.month} day={this.props.day} timeStart={this.state.timeStart}/>
+                    <EventForm month={this.props.month} monthNum={this.props.monthNum} day={this.props.day} timeStart={this.state.timeStart}/>
             </div>);
     }
 }
@@ -91,10 +115,3 @@ export default DayEventBuilder;
 
 
 
-/*handleDescriptionChange: function(e) {
-       this.setState({description: e.target.value});
-   };
-
-   handleNameChange: function(e) {
-       this.setState({name: e.target.value});
-   };*/

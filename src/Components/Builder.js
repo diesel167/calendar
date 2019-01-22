@@ -2,14 +2,13 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import CellBuild from './CellBuild.js';
 import DayEventBuilder from './DayEventBuilder.js';
-import $ from 'jquery';
+
 
 
 
 let currentDate= new Date();
 let months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-//let month = currentDate.getMonth(); //current month
-//let year = currentDate.getFullYear();   //current year
+
 
 
 
@@ -27,6 +26,11 @@ class Builder extends React.Component {
     clickCell=(x,y)=>{
         this.setState({day:x});
         this.setState({month:y});
+    };
+
+    clearLocalStorage=()=>{
+        //очищаем все хранилище
+        localStorage.clear();
     };
 
     createTable =(data)=>{
@@ -103,7 +107,11 @@ class Builder extends React.Component {
         return (
             <div className="container">
                 <div className="calendar">{this.createTable(this.state.dataState)}</div>
-                <DayEventBuilder day={this.state.day} month={months[this.state.month]}/>
+                <br/>
+                <button  onClick={this.clearLocalStorage}>DELETE ALL EVENTS</button>
+                <DayEventBuilder day={this.state.day} monthNum={this.state.dataState.getMonth()+1} month={months[this.state.month]}/>
+
+
             </div>
         )
     }
