@@ -13,7 +13,7 @@ import $ from 'jquery';
     },
  ];*/
 
-
+let temp='00:00';
 
 class DayEventBuilder extends React.Component {
 
@@ -23,27 +23,39 @@ class DayEventBuilder extends React.Component {
             day:this.props.day,             //take actual day and month of the clicked cell from CellBuild
             month:this.props.month,
             timeStart:'00:00',
-            storage:JSON.parse(localStorage.getItem("myEl"))
+            storage:localStorage.getItem("myEl")
         };
         this.selectedTime = this.selectedTime.bind(this);
     }
 
     selectedTime=(x)=>{
-        this.setState({timeStart:x})
+        this.setState({timeStart:x});
+        temp=x;
     };
 
+    changeDEB=()=>{
+        this.setState({storage:localStorage.getItem("myEl")});
+    };
 
     //if new props will be, this method will be called again
     static getDerivedStateFromProps(props, state) {
-
-        if(state.storage !== JSON.parse(localStorage.getItem("myEl"))) {
+        if((state.storage) !== localStorage.getItem("myEl")) {
             return {
-                storage:JSON.parse(localStorage.getItem("myEl"))
+                storage:localStorage.getItem("myEl")
             };
         }
+
+        if(state.timeStart!==temp){
+            return {
+                timeStart:temp
+            };
+        }
+
         // Return null to indicate no change to state.
         return null;
     }
+
+
 
     render(){
 
@@ -51,6 +63,7 @@ class DayEventBuilder extends React.Component {
         let rows=[];    //create rows container
         let skip=0;   //skip <td> adding if needed
         //build table
+        let parsed=JSON.parse(this.state.storage);
         for (let i=0;i<25;i++){
             let cells=[];   //create empty cells container
 
@@ -64,24 +77,23 @@ class DayEventBuilder extends React.Component {
                 skip=rowspan;   //set skip counter
             }
 */
-            if(this.state.storage){
-                this.state.storage.map((event)=>{
-                    if((i+':00')===event.time1){
+//map parsed item "myEl" in localeStorage and draw event if needed
+            if(parsed){
+                parsed.map((event,k)=>{
+                    //check if the event really today
+                    if((i+':00')===event.time1 && event.month===this.props.monthNum && event.year===this.props.year && event.day===this.props.day ){
                         let rowspan = event.time2.substring(0, event.time2.length-3)-event.time1.substring(0, event.time1.length-3);   //calculate how long will the event be
-                        cells.push(<td rowSpan={rowspan} className="setEvent">{event.task}</td>);
+                        cells.push(<td key={k} rowSpan={rowspan} className="setEvent">{event.task}</td>);
                         skip=rowspan;   //set skip counter
                     }
                 },this);
             }
 
 
-            //draw empty right cell
+            //draw empty right cell with the listener for adding event
             if(skip<=0){   //if we finished skip <td> adding while event was
-                cells.push(<td onClick={() => {    ///////////////////////////////////////////////////////////
-                    //this.setState({timeStart:i+':00'});
+                cells.push(<td onClick={() => {
                     this.selectedTime(i+':00');
-                    console.log(this.state.timeStart);
-                    //console.log(i+':00');
                     $(function () {
                         $('table.main').css('opacity','.3');
                         $('table.dayEvents').css('opacity','.5');
@@ -102,11 +114,16 @@ class DayEventBuilder extends React.Component {
             })
         }
         }>&#215;</button></th></tr></thead><tbody>{rows}</tbody></table>);
-        console.log(this.state.storage);
+
 
         return (<div>
                     <div>{table}</div>
-                    <EventForm month={this.props.month} monthNum={this.props.monthNum} day={this.props.day} timeStart={this.state.timeStart}/>
+                    <EventForm month={this.props.month}
+                               timeStart={this.state.timeStart}
+                               monthNum={this.props.monthNum}
+                               day={this.props.day}
+                               changeDEB={this.changeDEB}
+                               year={this.props.year}/>
             </div>);
     }
 }

@@ -239,5 +239,10 @@ td.setEvent {
 
 .submitButton:focus {outline:none !important;}
 
+.deleteAllEv{
+    width:120px;
+    float:right;
+
+}
 
 

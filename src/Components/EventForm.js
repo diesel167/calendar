@@ -2,8 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import $ from 'jquery';
 
-//let events=[];
-let i=false;   //helper variable to getDerivedStateFromProps work only once, cause state.time1 will changes
+
+let i=false;   //helper variable to getDerivedStateFromProps work only once,and prevent working in case state.time1 changes
                 // and will !==props.timeStart (condition in  getDerivedStateFromProps)
 
 class EventForm extends React.Component {
@@ -11,7 +11,7 @@ class EventForm extends React.Component {
     constructor() {
         super();
         this.state = {
-            i:false,
+
             task: '',
             time1:'00:00',
             time2:'00:00',
@@ -25,10 +25,8 @@ class EventForm extends React.Component {
 
     //if new props will be, this method will be called again
     static getDerivedStateFromProps(props, state) {
-
         if(state.time1 !== props.timeStart && i===false) {
             i=true;
-
             return {
                 time1: props.timeStart,   //set time1, time2 state
                 time2: props.timeStart
@@ -55,14 +53,17 @@ class EventForm extends React.Component {
         let temp=JSON.parse(localStorage.getItem("myEl"));
         let el ={
             date:'2019.'+this.props.monthNum+'.'+this.props.day,
+            day:this.props.day,
+            month:this.props.monthNum,
+            year:this.props.year,
             task:this.state.task.slice(),
             time1:this.state.time1.slice(),
             time2:this.state.time2.slice()
         };
         temp.push(el);
-
-        localStorage.setItem("myEl", JSON.stringify(temp)); //запишем его в хранилище по ключу "myKey"
-       //events.push(el);
+        localStorage.setItem("myEl", JSON.stringify(temp)); //write it in localstorage under key "myKey"
+        this.props.changeDEB();         //update DayEventBuilder's state
+        this.setState({task:''});  //clear task field
         event.preventDefault();
     }
 
@@ -79,6 +80,7 @@ class EventForm extends React.Component {
     }
 
     render() {
+        console.log(this.props.timeStart);
         return (
             <div className="form col-lg-6 col-md-6 col-sm-8 col-xs-8">
                 <button onClick={() => {
@@ -96,10 +98,16 @@ class EventForm extends React.Component {
                                      onChange={this.onTime1Change}/></label>
                         <label><input type="time" step="3600" name="time2" value={this.addZero(this.state.time2)}
                                       onChange={this.onTime2Change}/></label></p>
-
-
                     <textarea className="tasktext" name="com" rows="3" onChange={this.onTaskChange}  value={this.state.task}/>
-                    <p><input className="submitButton" type="submit" value="Submit" /></p>
+                    <p><input className="submitButton" type="submit" value="Submit" onClick={() => {
+                        console.log(this.props.timeStart);
+                        i=false;   //set to default i variable
+                        $(function () {
+                            $('table').css('display', 'table');
+                            $('.form').css('display', 'none');
+                            $('table.dayEvents').css('opacity','1');
+                            $('table.main').css('opacity','.5');
+                        })}} /></p>
                 </form>
             </div>
         );
