@@ -22,6 +22,8 @@ class Builder extends React.Component {
         };
     }
 
+
+
     //help function to control date parameters in cell which is clicked
     clickCell=(x,y)=>{
         this.setState({day:x});

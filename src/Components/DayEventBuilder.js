@@ -62,6 +62,7 @@ class DayEventBuilder extends React.Component {
         let table=[];    //create table container
         let rows=[];    //create rows container
         let skip=0;   //skip <td> adding if needed
+
         //build table
         let parsed=JSON.parse(this.state.storage);
         for (let i=0;i<25;i++){
@@ -69,14 +70,7 @@ class DayEventBuilder extends React.Component {
 
             //left cell with time in row
             cells.push(<td>{i+':00'}</td>);
-/*
-            //if we met the time of beginning event => we draw event another color and set skip var for skipping row drawing
-            if((i+':00')===events[0].time1){
-                let rowspan = events[0].time2.substring(0, 2)-events[0].time1.substring(0, 2);   //calculate how long will the event be
-                cells.push(<td rowSpan={rowspan} className="setEvent">{events[0].task}</td>);
-                skip=rowspan;   //set skip counter
-            }
-*/
+
 //map parsed item "myEl" in localeStorage and draw event if needed
             if(parsed){
                 parsed.map((event,k)=>{

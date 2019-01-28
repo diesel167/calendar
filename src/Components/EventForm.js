@@ -80,7 +80,7 @@ class EventForm extends React.Component {
     }
 
     render() {
-        console.log(this.props.timeStart);
+
         return (
             <div className="form col-lg-6 col-md-6 col-sm-8 col-xs-8">
                 <button onClick={() => {
@@ -100,7 +100,7 @@ class EventForm extends React.Component {
                                       onChange={this.onTime2Change}/></label></p>
                     <textarea className="tasktext" name="com" rows="3" onChange={this.onTaskChange}  value={this.state.task}/>
                     <p><input className="submitButton" type="submit" value="Submit" onClick={() => {
-                        console.log(this.props.timeStart);
+
                         i=false;   //set to default i variable
                         $(function () {
                             $('table').css('display', 'table');
