@@ -64,6 +64,7 @@ class EventForm extends React.Component {
         this.props.changeDEB(el.task);         //update DayEventBuilder's state
         this.setState({task:''});  //clear task field
         event.preventDefault();
+
     }
 
     onTaskChange(event){
@@ -76,6 +77,7 @@ class EventForm extends React.Component {
 
     onTime2Change(event){
         this.setState({time2: event.target.value});
+        console.log(this.state.time2);
     }
 
     render() {

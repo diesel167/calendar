@@ -40,7 +40,7 @@ class CellBuild extends React.Component {
 
     ifNotFirstToday=(x,bool)=>{
         if(x!==0 && bool===false){
-            return <div className="additional_events">More events</div>
+            return <div className="additional_events more">{x} more events</div>
         }
     };
 
@@ -71,9 +71,9 @@ class CellBuild extends React.Component {
                 if(event.month===this.props.month+1 && event.day===this.props.date ){   //add  this YEAR CHECKER
 
                     //if we have 1 event displayed and 1 block 'more events' we set oneTime to true to prevent ifNotFirstToday's work
-                    if(n>1){
+                   /* if(n>1){
                         oneTime=true;
-                    }
+                    }*/
                     //if we meet earlier event
                     if(parseInt(event.time1.substring(0, event.time1.length-3),10)<parseInt(time1,10)){
                         //set cell with event information
