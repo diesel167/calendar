@@ -245,4 +245,14 @@ td.setEvent {
 
 }
 
+.additional_events{
+    text-align:left;
+    margin:0 2px 0 2px;
+    border-radius:5px;
+    font-size:12px;
+    color:white;
+    padding-left:5px;
+    background-color: rgba(204, 87, 87, 0.6);
+}
+
 

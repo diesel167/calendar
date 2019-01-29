@@ -3,14 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import CellBuild from './CellBuild.js';
 import DayEventBuilder from './DayEventBuilder.js';
 
-
-
-
 let currentDate= new Date();
 let months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-
-
 
 //Builder calendar body
 class Builder extends React.Component {
@@ -19,10 +13,27 @@ class Builder extends React.Component {
         super(props);
         this.state = {
             dataState: props.helpDate,   //set date to build and display
+            storageForCellBuild:localStorage.getItem("myEl")
         };
+        this.transit=this.transit.bind(this)
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if((state.storageForCellBuild) !== localStorage.getItem("myEl")) {
+            return {
+                storageForCellBuild:localStorage.getItem("myEl")
+            };
+        }
+        // Return null to indicate no change to state.
+        return null;
+    }
 
+    //callback transit function for DayEventBuilder changeDEB which is used in EventForm Submit click listener
+    transit=(x)=>{
+        this.setState({ storageForCellBuild:localStorage.getItem("myEl")});
+        this.setState({taskForCellBuild:x});
+        console.log(x);
+    };
 
     //help function to control date parameters in cell which is clicked
     clickCell=(x,y)=>{
@@ -30,22 +41,22 @@ class Builder extends React.Component {
         this.setState({month:y});
     };
 
+    //delete all user events
     clearLocalStorage=()=>{
         //очищаем все хранилище
         localStorage.clear();
+        this.setState({ storageForCellBuild:localStorage.getItem("myEl")});
     };
 
     createTable =(data)=>{
 
+        //create temp data objects
         let helpDate = new Date(data.getFullYear(), data.getMonth(), data.getDate());    //help date for drawing
         let helpOther = new Date(data.getFullYear(), data.getMonth(), data.getDate());   //help date for build previous month days
         helpDate.setDate(1);
         helpOther.setDate(1);
         let table=[];    //create table container
         let rows=[];    //create rows container
-
-
-
 
         //outer loop for rows creating (filling rows container)
         for(let i=0;i<6;i++){
@@ -58,7 +69,11 @@ class Builder extends React.Component {
                 if(i===0&&j<helpDate.getDay()-1){
                     helpOther.setDate(-helpDate.getDay()+2+j);
 
-                    cells.push(<CellBuild date={helpOther.getDate()} month={helpOther.getMonth()} isNowDate="numbers otherMonth"/>);
+                    cells.push(<CellBuild stateXXX={this.state.storageForCellBuild}
+                                          taskForCellBuild={this.state.taskForCellBuild}
+                                          date={helpOther.getDate()}
+                                          month={helpOther.getMonth()}
+                                          isNowDate="numbers otherMonth"/>);
                 }
                 //continue drawing calendar
                 else{
@@ -68,17 +83,30 @@ class Builder extends React.Component {
                         //checking for today
                         if(helpDate.getDate()===currentDate.getDate()&&helpDate.getMonth()===currentDate.getMonth()&&helpDate.getFullYear()===currentDate.getFullYear()){
 
-                            cells.push(<CellBuild clickCell={this.clickCell} date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers nowDate"/>); //join cell to cells container
+                            cells.push(<CellBuild clickCell={this.clickCell}
+                                                  date={helpDate.getDate()}
+                                                  stateXXX={this.state.storageForCellBuild}
+                                                  taskForCellBuild={this.state.taskForCellBuild}
+                                                  month={helpDate.getMonth()}
+                                                  isNowDate="numbers nowDate"/>); //join cell to cells container
                         }
+                        //if not today
                         else{
-
-                            cells.push(<CellBuild clickCell={this.clickCell} date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers" />); //join cell to cells container
-
+                            cells.push(<CellBuild clickCell={this.clickCell}
+                                                  date={helpDate.getDate()}
+                                                  stateXXX={this.state.storageForCellBuild}
+                                                  taskForCellBuild={this.state.taskForCellBuild}
+                                                  month={helpDate.getMonth()}
+                                                  isNowDate="numbers" />); //join cell to cells container
                         }
                     }
                     //next month days
                     else{
-                        cells.push(<CellBuild date={helpDate.getDate()} month={helpDate.getMonth()} isNowDate="numbers otherMonth" />); //join cell to cells container
+                        cells.push(<CellBuild stateXXX={this.state.storageForCellBuild}
+                                              taskForCellBuild={this.state.taskForCellBuild}
+                                              date={helpDate.getDate()}
+                                              month={helpDate.getMonth()}
+                                              isNowDate="numbers otherMonth" />); //join cell to cells container
                     }
                     helpDate.setDate(helpDate.getDate()+1);
                 }
@@ -102,16 +130,14 @@ class Builder extends React.Component {
         return table;
     };
 
-
-
     render() {
-
         return (
             <div className="container">
                 <div className="calendar">{this.createTable(this.state.dataState)}</div>
                 <br/>
                 <button className="deleteAllEv" onClick={this.clearLocalStorage}>DELETE ALL EVENTS</button>
                 <DayEventBuilder day={this.state.day}
+                                 transit={this.transit}
                                  monthNum={this.state.dataState.getMonth()+1}
                                  year={this.state.dataState.getFullYear()}
                                  month={months[this.state.month]}/>
@@ -119,7 +145,6 @@ class Builder extends React.Component {
         )
     }
 }
-
 
 export default Builder;
 

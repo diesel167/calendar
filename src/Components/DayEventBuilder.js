@@ -3,16 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import EventForm from './EventForm.js';
 import $ from 'jquery';
 
-
-/*let events = [
-    {id:0,
-        date:"2019.01.20",
-        task:"Event 1 for this day",
-        time1:"15:00",
-        time2:"19:00"
-    },
- ];*/
-
 let temp='00:00';
 
 class DayEventBuilder extends React.Component {
@@ -33,8 +23,9 @@ class DayEventBuilder extends React.Component {
         temp=x;
     };
 
-    changeDEB=()=>{
+    changeDEB=(x)=>{
         this.setState({storage:localStorage.getItem("myEl")});
+        this.props.transit(x);
     };
 
     //if new props will be, this method will be called again
@@ -44,18 +35,14 @@ class DayEventBuilder extends React.Component {
                 storage:localStorage.getItem("myEl")
             };
         }
-
         if(state.timeStart!==temp){
             return {
                 timeStart:temp
             };
         }
-
         // Return null to indicate no change to state.
         return null;
     }
-
-
 
     render(){
 
@@ -71,7 +58,7 @@ class DayEventBuilder extends React.Component {
             //left cell with time in row
             cells.push(<td>{i+':00'}</td>);
 
-//map parsed item "myEl" in localeStorage and draw event if needed
+            //map parsed item "myEl" in localeStorage and draw event if needed
             if(parsed){
                 parsed.map((event,k)=>{
                     //check if the event really today
@@ -100,10 +87,10 @@ class DayEventBuilder extends React.Component {
         }
 
         //create table and create exit button from events list
-        //console.log('DayEventBuilder state.day ='+this.state.day);
+
         table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th></th><th><div className='eventDate'><div>{this.props.month}</div><div>{this.props.day}</div></div><button onClick={() => {
             $(function () {
-                $('table.main').css('opacity','1');
+                $('table.main').css('opacity','1');    //EXIT button
                 $('table.dayEvents').css('display','none');
             })
         }

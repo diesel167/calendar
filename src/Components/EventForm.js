@@ -2,7 +2,6 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import $ from 'jquery';
 
-
 let i=false;   //helper variable to getDerivedStateFromProps work only once,and prevent working in case state.time1 changes
                 // and will !==props.timeStart (condition in  getDerivedStateFromProps)
 
@@ -62,7 +61,7 @@ class EventForm extends React.Component {
         };
         temp.push(el);
         localStorage.setItem("myEl", JSON.stringify(temp)); //write it in localstorage under key "myKey"
-        this.props.changeDEB();         //update DayEventBuilder's state
+        this.props.changeDEB(el.task);         //update DayEventBuilder's state
         this.setState({task:''});  //clear task field
         event.preventDefault();
     }
