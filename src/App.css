@@ -268,3 +268,9 @@ td.setEvent {
     float:right;
 
 }
+
+.time_handlers{
+    width:150px !important;
+    display:inline-block;
+    font-weight:bold;
+}

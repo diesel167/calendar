@@ -121,9 +121,9 @@ class EventForm extends React.Component {
                 }}>&larr;</button>
                 <h1>Create task</h1>
                 <form onSubmit={this.onSubmit}>
-                    <p><label><input type="time" step="3600" name="time1" value={this.addZero(this.state.time1)}
-                                     onChange={this.onTime1Change}/></label>
-                        <label><input type="time" step="3600" name="time2" value={this.addZero(this.state.time2)}
+                    <p><div className="time_handlers">Time of beginning  </div><label><input type="time" step="3600" name="time1" value={this.addZero(this.state.time1)}
+                                     onChange={this.onTime1Change}/></label><br/>
+                        <label><div className="time_handlers" >Time of the end  </div><input type="time" step="3600" name="time2" value={this.addZero(this.state.time2)}
                                       onChange={this.onTime2Change}/></label></p>
                     <textarea className="tasktext" name="com" rows="3" onChange={this.onTaskChange}  value={this.state.task}/>
                     <p><input className="submitButton" type="submit" value="Submit" onClick={() => {
