@@ -173,6 +173,7 @@ table.dayEvents {
     border-top: 1px solid rgba(0, 0, 0, 0.23);
     outline: none;
     height:30px;
+    overflow:hidden;
 }
 
 
@@ -186,6 +187,7 @@ table.dayEvents {
 
 .dayEvents tbody tr td:nth-child(2){
     padding-left:20px;
+    height:30px;
 }
 
 
@@ -198,7 +200,6 @@ table.dayEvents {
 .setEvent{
     background-color:indianred;
     color:white;
-
 }
 
 td.setEvent {
@@ -253,6 +254,8 @@ td.setEvent {
     color:white;
     padding-left:5px;
     background-color: rgba(204, 87, 87, 0.6);
+    height:20px;
+    overflow:hidden;
 }
 
 .more{
@@ -260,4 +263,8 @@ td.setEvent {
     background-color: rgba(121, 54, 54, 0.6);
 }
 
+.deleteOneEvent{
+    width:100px;
+    float:right;
 
+}

@@ -38,8 +38,8 @@ class CellBuild extends React.Component {
          };
     }
 
-    ifNotFirstToday=(x,bool)=>{
-        if(x!==0 && bool===false){
+    ifNotFirstToday=(x)=>{
+        if(x!==0){
             return <div className="additional_events more">{x} more events</div>
         }
     };
@@ -65,7 +65,7 @@ class CellBuild extends React.Component {
             let time1=24;  //let initial time1 value to check which event will be first in the day
             let index=0;  //index to control checking event
             let n=0; //counter of events today
-            let oneTime=false;  //say us that 'more events' has not displayed yet
+
             parsed.map((event,number)=>{
                 //if the event really today
                 if(event.month===this.props.month+1 && event.day===this.props.date ){   //add  this YEAR CHECKER
@@ -83,7 +83,7 @@ class CellBuild extends React.Component {
                                 $('table.main').css('opacity','.5');
                                 $('table.dayEvents').css('display','table');
                             })}}><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p>
-                            <div className="additional_events">{event.task}</div>{this.ifNotFirstToday(n,oneTime)}</div></td>;
+                            <div className="additional_events">{event.task}</div>{this.ifNotFirstToday(n)}</div></td>;
                         time1=event.time1.substring(0, event.time1.length-3);   //set earliest time
                         index=number;   //set index of earliest event in that day
                         n++;  //set counter more than 1 event in that day
@@ -97,7 +97,7 @@ class CellBuild extends React.Component {
                                 $('table.main').css('opacity','.5');
                                 $('table.dayEvents').css('display','table');
                             })}}><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p>
-                            <div className="additional_events">{parsed[index].task}</div>{this.ifNotFirstToday(n,oneTime)}</div></td>;
+                            <div className="additional_events">{parsed[index].task}</div>{this.ifNotFirstToday(n)}</div></td>;
                         n++;
 
                     }
@@ -105,7 +105,6 @@ class CellBuild extends React.Component {
             },this);
             index=0;
             n=0;
-            oneTime=false;
         }
 
         //check for holiday day

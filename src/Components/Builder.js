@@ -15,7 +15,8 @@ class Builder extends React.Component {
             dataState: props.helpDate,   //set date to build and display
             storageForCellBuild:localStorage.getItem("myEl")
         };
-        this.transit=this.transit.bind(this)
+        this.transit=this.transit.bind(this);
+        this.eventDelete=this.eventDelete.bind(this)
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -33,6 +34,14 @@ class Builder extends React.Component {
         this.setState({ storageForCellBuild:localStorage.getItem("myEl")});
         this.setState({taskForCellBuild:x});
         console.log(x);
+    };
+
+    //function for DELETE button in the cell for CellBuild
+    eventDelete=(kk)=>{
+        let temp=JSON.parse(localStorage.getItem("myEl"));
+        temp.splice(kk,1);
+        localStorage.setItem("myEl", JSON.stringify(temp)); //write it in localstorage under key "myKey"
+        this.setState({storageForCellBuild:localStorage.getItem("myEl")});
     };
 
     //help function to control date parameters in cell which is clicked
@@ -138,6 +147,7 @@ class Builder extends React.Component {
                 <button className="deleteAllEv" onClick={this.clearLocalStorage}>DELETE ALL EVENTS</button>
                 <DayEventBuilder day={this.state.day}
                                  transit={this.transit}
+                                 eventDelete={this.eventDelete}
                                  monthNum={this.state.dataState.getMonth()+1}
                                  year={this.state.dataState.getFullYear()}
                                  month={months[this.state.month]}/>

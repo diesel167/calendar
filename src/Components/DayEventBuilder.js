@@ -64,7 +64,8 @@ class DayEventBuilder extends React.Component {
                     //check if the event really today
                     if((i+':00')===event.time1 && event.month===this.props.monthNum && event.year===this.props.year && event.day===this.props.day ){
                         let rowspan = event.time2.substring(0, event.time2.length-3)-event.time1.substring(0, event.time1.length-3);   //calculate how long will the event be
-                        cells.push(<td key={k} rowSpan={rowspan} className="setEvent">{event.task}</td>);
+                        cells.push(<td rowSpan={rowspan} className="setEvent">{event.task}<button className="deleteOneEvent"
+                                                                                                  onClick={() => {this.props.eventDelete(k)}}>delete</button></td>);
                         skip=rowspan;   //set skip counter
                     }
                 },this);
