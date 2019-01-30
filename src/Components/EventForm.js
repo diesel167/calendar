@@ -50,21 +50,47 @@ class EventForm extends React.Component {
         }
 
         let temp=JSON.parse(localStorage.getItem("myEl"));
-        let el ={
+        let ifValid=true;
+        temp.map((event)=>{
+            if(event.day===this.props.day && event.month===this.props.monthNum && event.year===this.props.year ){
+                if(parseInt(this.state.time2)>parseInt(event.time1)&&parseInt(this.state.time1)<=parseInt(event.time1)){
+                    alert('You have already event at this time');
+                    ifValid=false;
+                }
+            }
+        });
+/*((parseInt(event.time1)<parseInt(this.state.time2)<=parseInt(event.time2))||
+                    (parseInt(this.state.time1)<=parseInt(event.time1)&&parseInt(this.state.time2)>=parseInt(event.time2)))*/
+
+        if (ifValid){
+            let el ={
+                date:'2019.'+this.props.monthNum+'.'+this.props.day,
+                day:this.props.day,
+                month:this.props.monthNum,
+                year:this.props.year,
+                task:this.state.task,
+                time1:this.state.time1,
+                time2:this.state.time2
+            };
+            temp.push(el);
+            localStorage.setItem("myEl", JSON.stringify(temp)); //write it in localstorage under key "myKey"
+            this.props.changeDEB(el.task);         //update DayEventBuilder's state
+            this.setState({task:''});  //clear task field
+        }
+        /*let el ={
             date:'2019.'+this.props.monthNum+'.'+this.props.day,
             day:this.props.day,
             month:this.props.monthNum,
             year:this.props.year,
-            task:this.state.task.slice(),
-            time1:this.state.time1.slice(),
-            time2:this.state.time2.slice()
+            task:this.state.task,
+            time1:this.state.time1,
+            time2:this.state.time2
         };
         temp.push(el);
         localStorage.setItem("myEl", JSON.stringify(temp)); //write it in localstorage under key "myKey"
         this.props.changeDEB(el.task);         //update DayEventBuilder's state
-        this.setState({task:''});  //clear task field
+        this.setState({task:''});  //clear task field*/
         event.preventDefault();
-
     }
 
     onTaskChange(event){
