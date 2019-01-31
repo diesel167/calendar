@@ -197,6 +197,10 @@ table.dayEvents {
     border-bottom: none;
 }
 
+.setEvent>div:hover{
+    cursor:pointer;
+}
+
 .setEvent{
     background-color:indianred;
     color:white;
@@ -266,11 +270,25 @@ td.setEvent {
 .deleteOneEvent{
     width:100px;
     float:right;
-
+    margin-top:3px;
+    margin-right:3px;
 }
 
 .time_handlers{
     width:150px !important;
     display:inline-block;
     font-weight:bold;
+}
+
+.inCellSmall{
+    float:left;
+    width:calc(100% - 103px);
+    overflow:hidden;
+    height:30px;
+    display:inline-block;
+}
+.inCellBig{
+    width:calc(100% - 103px);
+    float:left;
+    height:30px;
 }

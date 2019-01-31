@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import EventForm from './EventForm.js';
+import Event from './Event.js';
 import $ from 'jquery';
 
 let temp='00:00';
@@ -10,6 +11,7 @@ class DayEventBuilder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isSmall:'inCellSmall',    //is the event block small or big already
             day:this.props.day,             //take actual day and month of the clicked cell from CellBuild
             month:this.props.month,
             timeStart:'00:00',
@@ -64,12 +66,14 @@ class DayEventBuilder extends React.Component {
                     //check if the event really today
                     if((i+':00')===event.time1 && event.month===this.props.monthNum && event.year===this.props.year && event.day===this.props.day ){
                         let rowspan = event.time2.substring(0, event.time2.length-3)-event.time1.substring(0, event.time1.length-3);   //calculate how long will the event be
-                        cells.push(<td rowSpan={rowspan} className="setEvent">{event.task}<button className="deleteOneEvent"
+
+                        cells.push(<td rowSpan={rowspan} className="setEvent"><Event eventTask={event.task}/><button className="deleteOneEvent"
                                                                                                   onClick={() => {this.props.eventDelete(k)}}>delete</button></td>);
                         skip=rowspan;   //set skip counter
                     }
                 },this);
             }
+
 
 
             //draw empty right cell with the listener for adding event
@@ -90,6 +94,7 @@ class DayEventBuilder extends React.Component {
         //create table and create exit button from events list
 
         table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th></th><th><div className='eventDate'><div>{this.props.month}</div><div>{this.props.day}</div></div><button onClick={() => {
+            this.setState({isSmall:"inCellSmall"});  //reset event blocks to small
             $(function () {
                 $('table.main').css('opacity','1');    //EXIT button
                 $('table.dayEvents').css('display','none');
