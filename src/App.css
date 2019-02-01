@@ -290,5 +290,5 @@ td.setEvent {
 .inCellBig{
     width:calc(100% - 103px);
     float:left;
-    height:30px;
+
 }

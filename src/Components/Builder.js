@@ -12,7 +12,7 @@ class Builder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataState: props.helpDate,   //set date to build and display
+            dataState: this.props.helpDate,   //set date to build and display
             storageForCellBuild:localStorage.getItem("myEl")
         };
         this.transit=this.transit.bind(this);
@@ -24,6 +24,11 @@ class Builder extends React.Component {
             return {
                 storageForCellBuild:localStorage.getItem("myEl")
             };
+        }
+        if((state.dataState)!==props.helpDate){
+            return{
+                dataState: props.helpDate
+            }
         }
         // Return null to indicate no change to state.
         return null;
@@ -61,9 +66,12 @@ class Builder extends React.Component {
 
         //create temp data objects
         let helpDate = new Date(data.getFullYear(), data.getMonth(), data.getDate());    //help date for drawing
+
         let helpOther = new Date(data.getFullYear(), data.getMonth(), data.getDate());   //help date for build previous month days
+
         helpDate.setDate(1);
         helpOther.setDate(1);
+
         let table=[];    //create table container
         let rows=[];    //create rows container
 
@@ -77,12 +85,13 @@ class Builder extends React.Component {
                 //loop for draw previous month days and padding current 1st days relative days of week
                 if(i===0&&j<helpDate.getDay()-1){
                     helpOther.setDate(-helpDate.getDay()+2+j);
-
                     cells.push(<CellBuild stateXXX={this.state.storageForCellBuild}
                                           taskForCellBuild={this.state.taskForCellBuild}
                                           date={helpOther.getDate()}
                                           month={helpOther.getMonth()}
                                           isNowDate="numbers otherMonth"/>);
+                    helpOther.setDate(1);       //to reset helpOther for next loop
+                    helpOther.setMonth(helpOther.getMonth()+1);     //to reset helpOther for next loop
                 }
                 //continue drawing calendar
                 else{

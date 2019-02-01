@@ -121,7 +121,8 @@ class EventForm extends React.Component {
                 }}>&larr;</button>
                 <h1>Create task</h1>
                 <form onSubmit={this.onSubmit}>
-                    <p><div className="time_handlers">Time of beginning  </div><label><input type="time" step="3600" name="time1" value={this.addZero(this.state.time1)}
+                    <p>
+                        <div className="time_handlers">Time of beginning  </div><label><input type="time" step="3600" name="time1" value={this.addZero(this.state.time1)}
                                      onChange={this.onTime1Change}/></label><br/>
                         <label><div className="time_handlers" >Time of the end  </div><input type="time" step="3600" name="time2" value={this.addZero(this.state.time2)}
                                       onChange={this.onTime2Change}/></label></p>
@@ -144,3 +145,7 @@ class EventForm extends React.Component {
 export default EventForm;
 
 
+/* day handler in form
+<div className="time_handlers">Day</div><label><input type="date" id="start" name="trip-start"
+       name="day1" value={this.state.time1)}
+                                                                                             onChange={this.onTime1Change}/></label><br/>*/
