@@ -77,19 +77,7 @@ class EventForm extends React.Component {
             this.props.changeDEB(el.task);         //update DayEventBuilder's state
             this.setState({task:''});  //clear task field
         }
-        /*let el ={
-            date:'2019.'+this.props.monthNum+'.'+this.props.day,
-            day:this.props.day,
-            month:this.props.monthNum,
-            year:this.props.year,
-            task:this.state.task,
-            time1:this.state.time1,
-            time2:this.state.time2
-        };
-        temp.push(el);
-        localStorage.setItem("myEl", JSON.stringify(temp)); //write it in localstorage under key "myKey"
-        this.props.changeDEB(el.task);         //update DayEventBuilder's state
-        this.setState({task:''});  //clear task field*/
+
         event.preventDefault();
     }
 

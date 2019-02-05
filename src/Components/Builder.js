@@ -88,7 +88,9 @@ class Builder extends React.Component {
                     cells.push(<CellBuild stateXXX={this.state.storageForCellBuild}
                                           taskForCellBuild={this.state.taskForCellBuild}
                                           date={helpOther.getDate()}
+                                          clickCell={this.clickCell}
                                           month={helpOther.getMonth()}
+                                          year={helpOther.getFullYear()}
                                           isNowDate="numbers otherMonth"/>);
                     helpOther.setDate(1);       //to reset helpOther for next loop
                     helpOther.setMonth(helpOther.getMonth()+1);     //to reset helpOther for next loop
@@ -106,6 +108,7 @@ class Builder extends React.Component {
                                                   stateXXX={this.state.storageForCellBuild}
                                                   taskForCellBuild={this.state.taskForCellBuild}
                                                   month={helpDate.getMonth()}
+                                                  year={helpOther.getFullYear()}
                                                   isNowDate="numbers nowDate"/>); //join cell to cells container
                         }
                         //if not today
@@ -115,6 +118,7 @@ class Builder extends React.Component {
                                                   stateXXX={this.state.storageForCellBuild}
                                                   taskForCellBuild={this.state.taskForCellBuild}
                                                   month={helpDate.getMonth()}
+                                                  year={helpOther.getFullYear()}
                                                   isNowDate="numbers" />); //join cell to cells container
                         }
                     }
@@ -122,8 +126,10 @@ class Builder extends React.Component {
                     else{
                         cells.push(<CellBuild stateXXX={this.state.storageForCellBuild}
                                               taskForCellBuild={this.state.taskForCellBuild}
+                                              clickCell={this.clickCell}
                                               date={helpDate.getDate()}
                                               month={helpDate.getMonth()}
+                                              year={helpOther.getFullYear()}
                                               isNowDate="numbers otherMonth" />); //join cell to cells container
                     }
                     helpDate.setDate(helpDate.getDate()+1);
