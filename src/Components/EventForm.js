@@ -59,14 +59,11 @@ class EventForm extends React.Component {
                 }
             }
         });
-/*((parseInt(event.time1)<parseInt(this.state.time2)<=parseInt(event.time2))||
-                    (parseInt(this.state.time1)<=parseInt(event.time1)&&parseInt(this.state.time2)>=parseInt(event.time2)))*/
 
         if (ifValid){
             let el ={
-                date:'2019.'+this.props.monthNum+'.'+this.props.day,
                 day:this.props.day,
-                month:this.props.monthNum,
+                month:this.props.month,
                 year:this.props.year,
                 task:this.state.task,
                 time1:this.state.time1,
@@ -132,8 +129,3 @@ class EventForm extends React.Component {
 
 export default EventForm;
 
-
-/* day handler in form
-<div className="time_handlers">Day</div><label><input type="date" id="start" name="trip-start"
-       name="day1" value={this.state.time1)}
-                                                                                             onChange={this.onTime1Change}/></label><br/>*/

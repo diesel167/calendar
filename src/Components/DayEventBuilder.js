@@ -64,7 +64,7 @@ class DayEventBuilder extends React.Component {
             if(parsed){
                 parsed.map((event,k)=>{
                     //check if the event really today
-                    if((i+':00')===event.time1 && event.month===this.props.monthNum && event.year===this.props.year && event.day===this.props.day ){
+                    if((i+':00')===event.time1 && event.month===this.props.month && event.year===this.props.year && event.day===this.props.day ){
                         let rowspan = event.time2.substring(0, event.time2.length-3)-event.time1.substring(0, event.time1.length-3);   //calculate how long will the event be
 
                         cells.push(<td rowSpan={rowspan} className="setEvent"><Event eventTask={event.task}/><button className="deleteOneEvent"
@@ -93,7 +93,8 @@ class DayEventBuilder extends React.Component {
 
         //create table and create exit button from events list
 
-        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th></th><th><div className='eventDate'><div>{this.props.month}</div><div>{this.props.day}</div></div><button onClick={() => {
+        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th></th>
+            <th><div className='eventDate'><div>{this.props.monthName}</div><div>{this.props.day}</div></div><button onClick={() => {
             this.setState({isSmall:"inCellSmall"});  //reset event blocks to small
             $(function () {
                 $('table.main').css('opacity','1');    //EXIT button
@@ -107,11 +108,11 @@ class DayEventBuilder extends React.Component {
                     <div>{table}</div>
                     <EventForm month={this.props.month}
                                timeStart={this.state.timeStart}
-                               monthNum={this.props.monthNum}
+                               monthName={this.props.monthName}
                                day={this.props.day}
                                changeDEB={this.changeDEB}
                                year={this.props.year}/>
-            </div>);
+                </div>);
     }
 }
 

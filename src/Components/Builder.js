@@ -38,7 +38,6 @@ class Builder extends React.Component {
     transit=(x)=>{
         this.setState({ storageForCellBuild:localStorage.getItem("myEl")});
         this.setState({taskForCellBuild:x});
-        console.log(x);
     };
 
     //function for DELETE button in the cell for CellBuild
@@ -91,7 +90,10 @@ class Builder extends React.Component {
                                           clickCell={this.clickCell}
                                           month={helpOther.getMonth()}
                                           year={helpOther.getFullYear()}
-                                          isNowDate="numbers otherMonth"/>);
+                                          isNowDate="numbers otherMonth"
+                                          todayDate={currentDate.getDate()}
+                                          todayMonth={currentDate.getMonth()}
+                                          todayYear={currentDate.getFullYear()}/>);
                     helpOther.setDate(1);       //to reset helpOther for next loop
                     helpOther.setMonth(helpOther.getMonth()+1);     //to reset helpOther for next loop
                 }
@@ -105,21 +107,29 @@ class Builder extends React.Component {
 
                             cells.push(<CellBuild clickCell={this.clickCell}
                                                   date={helpDate.getDate()}
-                                                  stateXXX={this.state.storageForCellBuild}
-                                                  taskForCellBuild={this.state.taskForCellBuild}
                                                   month={helpDate.getMonth()}
                                                   year={helpOther.getFullYear()}
-                                                  isNowDate="numbers nowDate"/>); //join cell to cells container
+                                                  stateXXX={this.state.storageForCellBuild}
+                                                  taskForCellBuild={this.state.taskForCellBuild}
+                                                  isNowDate="numbers nowDate"
+                                                  todayDate={currentDate.getDate()}
+                                                  todayMonth={currentDate.getMonth()}
+                                                  todayYear={currentDate.getFullYear()}/>);
+
+
                         }
                         //if not today
                         else{
                             cells.push(<CellBuild clickCell={this.clickCell}
                                                   date={helpDate.getDate()}
-                                                  stateXXX={this.state.storageForCellBuild}
-                                                  taskForCellBuild={this.state.taskForCellBuild}
                                                   month={helpDate.getMonth()}
                                                   year={helpOther.getFullYear()}
-                                                  isNowDate="numbers" />); //join cell to cells container
+                                                  stateXXX={this.state.storageForCellBuild}
+                                                  taskForCellBuild={this.state.taskForCellBuild}
+                                                  isNowDate="numbers"
+                                                  todayDate={currentDate.getDate()}
+                                                  todayMonth={currentDate.getMonth()}
+                                                  todayYear={currentDate.getFullYear()}/>); //join cell to cells container
                         }
                     }
                     //next month days
@@ -130,7 +140,10 @@ class Builder extends React.Component {
                                               date={helpDate.getDate()}
                                               month={helpDate.getMonth()}
                                               year={helpOther.getFullYear()}
-                                              isNowDate="numbers otherMonth" />); //join cell to cells container
+                                              isNowDate="numbers otherMonth"
+                                              todayDate={currentDate.getDate()}
+                                              todayMonth={currentDate.getMonth()}
+                                              todayYear={currentDate.getFullYear()}/>); //join cell to cells container
                     }
                     helpDate.setDate(helpDate.getDate()+1);
                 }
@@ -161,11 +174,11 @@ class Builder extends React.Component {
                 <br/>
                 <button className="deleteAllEv" onClick={this.clearLocalStorage}>DELETE ALL EVENTS</button>
                 <DayEventBuilder day={this.state.day}
+                                 month={this.state.month+1}
                                  transit={this.transit}
                                  eventDelete={this.eventDelete}
-                                 monthNum={this.state.dataState.getMonth()+1}
-                                 year={this.state.dataState.getFullYear()}
-                                 month={months[this.state.month]}/>
+                                 monthName={months[this.state.month]}
+                                 year={this.state.dataState.getFullYear()}/>
             </div>
         )
     }

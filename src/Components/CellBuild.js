@@ -38,9 +38,9 @@ class CellBuild extends React.Component {
          };
     }
 
-    ifNotFirstToday=(x)=>{
+    ifNotFirstToday=(x,c)=>{
         if(x!==0){
-            return <div className="additional_events more">{x} more events</div>
+            return <div className={c}>{x} more events</div>
         }
     };
 
@@ -53,7 +53,21 @@ class CellBuild extends React.Component {
     };
 
     render(){
+        //counter of events for holiday day
         let indicatorForEventHolidays=0;
+
+        //before today one color of event's block, after - another
+        let nameOfClass="additional_events";
+        let nameOfClassMore="additional_events more";
+
+
+        //calculate if the day is previous, then change it's classnames
+        if((this.props.date<this.props.todayDate && this.props.month===this.props.todayMonth && this.props.year===this.props.todayYear)||
+            (this.props.month<this.props.todayMonth && this.props.year<=this.props.todayYear) ){
+            nameOfClass="additional_events before";
+            nameOfClassMore="additional_events before";
+        }
+
         //do default cell value if not holiday
         let cell=<td tabIndex="0" onClick={this.onClick}><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p></div></td>;
 
@@ -69,12 +83,11 @@ class CellBuild extends React.Component {
             parsed.map((event,number)=>{
                 //if the event really today
                 if(event.month===this.props.month+1 && event.day===this.props.date && event.year===this.props.year){   //add  this YEAR CHECKER
-
                     //if we meet earlier event
                     if(parseInt(event.time1.substring(0, event.time1.length-3),10)<parseInt(time1,10)){
                         //set cell with event information
                         cell=<td tabIndex="0" onClick={this.onClick}><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p>
-                            <div className="additional_events">{event.task}</div>{this.ifNotFirstToday(n)}</div></td>;
+                            <div className={nameOfClass}>{event.task}</div>{this.ifNotFirstToday(n,nameOfClassMore)}</div></td>;
                         time1=event.time1.substring(0, event.time1.length-3);   //set earliest time
                         index=number;   //set index of earliest event in that day
                         n++;  //set counter more than 1 event in that day
@@ -84,7 +97,7 @@ class CellBuild extends React.Component {
                     else{
                         //set cell with event information
                         cell=<td tabIndex="0" onClick={this.onClick}><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p>
-                            <div className="additional_events">{parsed[index].task}</div>{this.ifNotFirstToday(n)}</div></td>;
+                            <div className={nameOfClass}>{parsed[index].task}</div>{this.ifNotFirstToday(n,nameOfClassMore)}</div></td>;
                         n++;
                         indicatorForEventHolidays++;   //increment counter of events for holiday day
                     }
@@ -107,17 +120,13 @@ class CellBuild extends React.Component {
                         $('table.main').css('opacity','.5');
                         $('table.dayEvents').css('display','table');
                     })}} className="holiday"><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p></div>
-                    <p className="holiday">{holiday.name}</p>{this.ifNotFirstToday(indicatorForEventHolidays)}</td>;
-
+                    <p className="holiday">{holiday.name}</p>{this.ifNotFirstToday(indicatorForEventHolidays,nameOfClassMore)}</td>;
             }
         },this);  //give CellBuilder as the context of map-function
-
-
 
         return cell;
     }
 }
-
 
 export default CellBuild;
 

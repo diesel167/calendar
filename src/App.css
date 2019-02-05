@@ -262,6 +262,10 @@ td.setEvent {
     overflow:hidden;
 }
 
+.before{
+    background-color: rgba(138, 138, 138, 0.44) !important;
+}
+
 .more{
     margin-top:2px;
     background-color: rgba(121, 54, 54, 0.6);
@@ -290,5 +294,4 @@ td.setEvent {
 .inCellBig{
     width:calc(100% - 103px);
     float:left;
-
 }
