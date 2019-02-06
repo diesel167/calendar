@@ -52,13 +52,19 @@ class EventForm extends React.Component {
         let temp=JSON.parse(localStorage.getItem("myEl"));
         let ifValid=true;
         temp.map((event)=>{
-            if(event.day===this.props.day && event.month===this.props.monthNum && event.year===this.props.year ){
+            if(event.day===this.props.day && event.month===this.props.month && event.year===this.props.year ){
+                //check for correct timing
                 if(parseInt(this.state.time2)>parseInt(event.time1)&&parseInt(this.state.time1)<=parseInt(event.time1)){
                     alert('You have already event at this time');
                     ifValid=false;
                 }
             }
         });
+        //check for min 1 hour length of event
+        if(parseInt(this.state.time2)===parseInt(this.state.time1)){
+            alert('You need create min 1 hour event');
+            ifValid=false;
+        }
 
         if (ifValid){
             let el ={
@@ -79,6 +85,7 @@ class EventForm extends React.Component {
     }
 
     onTaskChange(event){
+        console.log(this.props.timeStart);
         this.setState({task: event.target.value});
     }
 
@@ -91,11 +98,16 @@ class EventForm extends React.Component {
         console.log(this.state.time2);
     }
 
+    onDayChange(event){
+
+    }
+
     render() {
 
         return (
             <div className="form col-lg-6 col-md-6 col-sm-8 col-xs-8">
-                <button onClick={() => {
+                <button onClick={() => {   //EXIT button
+                    this.setState({task:''});  //clear task field
                     i=false;   //set to default i variable
                     $(function () {
                         $('table').css('display', 'table');
@@ -129,3 +141,7 @@ class EventForm extends React.Component {
 
 export default EventForm;
 
+
+/* day handler in form
+<div className="time_handlers">Day</div><label><input type="date" id="start" name="trip-start"
+       name="day1" value={this.state.time1)}  onChange={this.onTime1Change}/></label><br/>*/
