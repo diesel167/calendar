@@ -4,22 +4,23 @@ import $ from 'jquery';
 
 let i=false;   //helper variable to getDerivedStateFromProps work only once,and prevent working in case state.time1 changes
                 // and will !==props.timeStart (condition in  getDerivedStateFromProps)
+let checked=''; //helper for checkbox
 
 class EventForm extends React.Component {
-    monthNum;
+    monthName;
     constructor() {
         super();
         this.state = {
-
             task: '',
             time1:'00:00',
             time2:'00:00',
-
+            disabled:false,
         };
         this.onTaskChange = this.onTaskChange.bind(this);
         this.onTime1Change = this.onTime1Change.bind(this);
         this.onTime2Change = this.onTime2Change.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onDayChange = this.onDayChange.bind(this);
     }
 
     //if new props will be, this method will be called again
@@ -35,10 +36,15 @@ class EventForm extends React.Component {
         return null;
     }
 
-    //do 00:00 format for 1:00..9:00
-    addZero(n) {
-        return n.length > 4 ? n : "0" + n ;
-    }
+
+    checkbox(){
+        if(checked===''){
+            checked='checked'
+        }
+        else{
+            checked=''
+        }
+    };
 
     onSubmit(event){
         //initialize localstorage
@@ -62,8 +68,11 @@ class EventForm extends React.Component {
         });
         //check for min 1 hour length of event
         if(parseInt(this.state.time2)===parseInt(this.state.time1)){
-            alert('You need create min 1 hour event');
-            ifValid=false;
+            if(this.state.disabled===false){
+                alert('You need create min 1 hour event');
+                ifValid=false;
+                this.setState({task:''});  //clear task field
+            }
         }
 
         if (ifValid){
@@ -79,13 +88,13 @@ class EventForm extends React.Component {
             localStorage.setItem("myEl", JSON.stringify(temp)); //write it in localstorage under key "myKey"
             this.props.changeDEB(el.task);         //update DayEventBuilder's state
             this.setState({task:''});  //clear task field
+            this.setState({disabled:false}); //set default time field focus
+            checked='';  //uncheck the checkbox
         }
-
         event.preventDefault();
     }
 
     onTaskChange(event){
-        console.log(this.props.timeStart);
         this.setState({task: event.target.value});
     }
 
@@ -95,11 +104,20 @@ class EventForm extends React.Component {
 
     onTime2Change(event){
         this.setState({time2: event.target.value});
-        console.log(this.state.time2);
     }
 
-    onDayChange(event){
-
+    onDayChange(){
+        this.checkbox();
+        if(this.state.disabled===false){
+            this.setState({time1: '00:00'});
+            this.setState({time2: '00:00'});
+            this.setState({disabled: true});
+        }
+        else{
+            this.setState({time1: this.props.timeStart});
+            this.setState({time2: this.props.timeStart});
+            this.setState({disabled:false});
+        }
     }
 
     render() {
@@ -107,6 +125,8 @@ class EventForm extends React.Component {
         return (
             <div className="form col-lg-6 col-md-6 col-sm-8 col-xs-8">
                 <button onClick={() => {   //EXIT button
+                    checked='';  //uncheck the checkbox
+                    this.setState({disabled:false}); //set default checkbox
                     this.setState({task:''});  //clear task field
                     i=false;   //set to default i variable
                     $(function () {
@@ -119,13 +139,17 @@ class EventForm extends React.Component {
                 <h1>Create task</h1>
                 <form onSubmit={this.onSubmit}>
                     <p>
-                        <div className="time_handlers">Time of beginning  </div><label><input type="time" step="3600" name="time1" value={this.addZero(this.state.time1)}
-                                     onChange={this.onTime1Change}/></label><br/>
-                        <label><div className="time_handlers" >Time of the end  </div><input type="time" step="3600" name="time2" value={this.addZero(this.state.time2)}
-                                      onChange={this.onTime2Change}/></label></p>
+                        <div className="time_handlers">Time of beginning  </div>
+                        <label><input disabled={this.state.disabled} type="time" step="3600" name="time1" value={this.state.time1}
+                                     onChange={this.onTime1Change}/></label>
+                        <br/>
+                        <div className="time_handlers" >Time of the end  </div>
+                        <label><input disabled={this.state.disabled}  type="time" step="3600" name="time2" value={this.state.time2}
+                                     onChange={this.onTime2Change}/></label>
+                    </p>
+                    <input type="checkbox" checked={checked} name="allday" value="allday" onChange={this.onDayChange}/> All day <br/>
                     <textarea className="tasktext" name="com" rows="3" onChange={this.onTaskChange}  value={this.state.task}/>
                     <p><input className="submitButton" type="submit" value="Submit" onClick={() => {
-
                         i=false;   //set to default i variable
                         $(function () {
                             $('table').css('display', 'table');

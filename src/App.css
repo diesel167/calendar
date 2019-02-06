@@ -4,7 +4,9 @@ body{
   position:relative;
 }
 
-
+.scontainer{
+    margin:0 5%;
+}
 
 .head:nth-child(2){
   font-weight:bold;
@@ -19,24 +21,23 @@ div.head{
   display:inline-block;
 }
 
-
-
-
-
 table{
   padding:50px;
   border-collapse: collapse;
 }
 
+table.main{
+    table-layout:fixed;
+}
+
 .main td{
-  width:calc(100%/7);
+  width:calc(100%/7) !important;
   height:80px;
   padding:0;
   vertical-align:top;
   border-bottom: 1px solid rgba(0, 0, 0, 0.23);
   border-top: 1px solid rgba(0, 0, 0, 0.23);
   outline: none;
-
 }
 
 .main tr td:nth-child(6){
@@ -67,6 +68,7 @@ table{
   padding-right:10px;
   margin:0;
   outline: none;
+  font-weight:600;
 }
 
 .numbers p{
@@ -262,6 +264,7 @@ td.setEvent {
     overflow:hidden;
 }
 
+
 .before{
     background-color: rgba(138, 138, 138, 0.44) !important;
 }
@@ -294,4 +297,11 @@ td.setEvent {
 .inCellBig{
     width:calc(100% - 103px);
     float:left;
+}
+
+@media (min-width:2000px){
+    .main td {
+        height:150px;
+    }
+
 }

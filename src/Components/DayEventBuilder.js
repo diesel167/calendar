@@ -20,16 +20,6 @@ class DayEventBuilder extends React.Component {
         this.selectedTime = this.selectedTime.bind(this);
     }
 
-    selectedTime=(x)=>{
-        this.setState({timeStart:x});
-        temp=x;
-    };
-
-    changeDEB=(x)=>{
-        this.setState({storage:localStorage.getItem("myEl")});
-        this.props.transit(x);
-    };
-
     //if new props will be, this method will be called again
     static getDerivedStateFromProps(props, state) {
         if((state.storage) !== localStorage.getItem("myEl")) {
@@ -45,6 +35,21 @@ class DayEventBuilder extends React.Component {
         // Return null to indicate no change to state.
         return null;
     }
+
+    selectedTime=(x)=>{
+        this.setState({timeStart:x});
+        temp=x;
+    };
+
+    changeDEB=(x)=>{
+        this.setState({storage:localStorage.getItem("myEl")});
+        this.props.transit(x);
+    };
+
+    //do 00:00 format for 1:00..9:00
+    addZero(n) {
+        return n.length > 4 ? n : '0' + n ;
+    };
 
     render(){
 
@@ -63,9 +68,18 @@ class DayEventBuilder extends React.Component {
             //map parsed item "myEl" in localeStorage and draw event if needed
             if(parsed){
                 parsed.map((event,k)=>{
+
                     //check if the event really today
-                    if((i+':00')===event.time1 && event.month===this.props.month && event.year===this.props.year && event.day===this.props.day ){
-                        let rowspan = event.time2.substring(0, event.time2.length-3)-event.time1.substring(0, event.time1.length-3);   //calculate how long will the event be
+                    if(this.addZero((i+':00'))===event.time1 && event.month===this.props.month && event.year===this.props.year && event.day===this.props.day ){
+                        let rowspan;
+                        //console.log((i+':00'));
+                        //console.log(event.time1);
+                        if(event.time2==="00:00"){
+                            rowspan = 24;   //calculate how long will the event be
+                        }
+                        else{
+                            rowspan = event.time2.substring(0, event.time2.length-3)-event.time1.substring(0, event.time1.length-3);   //calculate how long will the event be
+                        }
 
                         cells.push(<td rowSpan={rowspan} className="setEvent"><Event eventTask={event.task}/><button className="deleteOneEvent"
                                                                                                   onClick={() => {this.props.eventDelete(k)}}>delete</button></td>);
@@ -107,7 +121,7 @@ class DayEventBuilder extends React.Component {
         return (<div>
                     <div>{table}</div>
                     <EventForm month={this.props.month}
-                               timeStart={this.state.timeStart}
+                               timeStart={this.addZero(this.state.timeStart)}
                                monthName={this.props.monthName}
                                day={this.props.day}
                                changeDEB={this.changeDEB}

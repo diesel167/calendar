@@ -169,7 +169,7 @@ class Builder extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="scontainer">
                 <div className="calendar">{this.createTable(this.state.dataState)}</div>
                 <br/>
                 <button className="deleteAllEv" onClick={this.clearLocalStorage}>DELETE ALL EVENTS</button>
