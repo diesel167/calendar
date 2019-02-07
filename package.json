@@ -2,8 +2,10 @@
   "name": "testcalc",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://diesel167.github.io/calendar/",
   "dependencies": {
     "bootstrap": "^4.2.1",
+    "gh-pages": "^2.0.1",
     "jquery": "^3.3.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
