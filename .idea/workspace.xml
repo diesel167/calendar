@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="180353bc-b869-4229-b053-b70aeee2be7f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Builder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CellBuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CellBuild.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/DayEventBuilder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DayEventBuilder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/EventForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/EventForm.js" afterDir="false" />
-    </list>
+    <list default="true" id="180353bc-b869-4229-b053-b70aeee2be7f" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -131,8 +123,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Components/EventForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="146" column="55" selection-start-line="146" selection-start-column="55" selection-end-line="146" selection-end-column="55" />
+            <state relative-caret-position="113">
+              <caret line="155" column="25" lean-forward="true" selection-start-line="155" selection-start-column="25" selection-end-line="155" selection-end-column="25" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -302,12 +294,12 @@
       <workItem from="1548915737212" duration="16736000" />
       <workItem from="1549349640713" duration="14827000" />
       <workItem from="1549431398134" duration="19095000" />
-      <workItem from="1549534484075" duration="4611000" />
+      <workItem from="1549534484075" duration="4851000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="293681000" />
+    <option name="totallyTimeSpent" value="293921000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -320,9 +312,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.18229167" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18229167" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -335,7 +326,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3289689" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.10801964" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.43207857" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -445,8 +436,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/EventForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="146" column="55" selection-start-line="146" selection-start-column="55" selection-end-line="146" selection-end-column="55" />
+        <state relative-caret-position="113">
+          <caret line="155" column="25" lean-forward="true" selection-start-line="155" selection-start-column="25" selection-end-line="155" selection-end-column="25" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
