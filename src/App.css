@@ -4,6 +4,16 @@ body{
   position:relative;
 }
 
+.spacer{
+    top:0;
+    position:absolute;
+    width:100vw;
+    height:100vh;
+    background: rgba(65, 65, 65, 0.22);
+    opacity:.5;
+    display:none;
+    z-index:3;
+}
 .scontainer{
     margin:0 5%;
 }
@@ -89,7 +99,7 @@ table.main{
 }
 
 .otherMonth{
-  color: #969696;
+  color: #b3b3b3;
 }
 
 td.holiday{
@@ -138,11 +148,14 @@ thead{
   box-shadow:0 0 20px 1px black;
   /*height:40%;*/
   padding:20px;
+  z-index:5;
 }
 
 .form button{
     margin-bottom:5px;
 }
+
+
 
 table.dayEvents {
     background:white;
@@ -155,6 +168,9 @@ table.dayEvents {
 
 }
 
+.dayEvents{
+    z-index:4;
+}
 
 .dayEvents thead tr th:nth-child(2){
     text-align:right;
@@ -194,9 +210,11 @@ table.dayEvents {
 
 
 
+
 .dayEvents tbody tr:last-child td{
     height:15px;
     border-bottom: none;
+
 }
 
 .setEvent>div:hover{

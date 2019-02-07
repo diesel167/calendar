@@ -48,6 +48,7 @@ class CellBuild extends React.Component {
         this.props.clickCell(this.props.date,this.props.month);
         $(function () {
             $('table.main').css('opacity','.5');
+            $('.spacer').css('display','block');
             $('table.dayEvents').css('display','table');
         })
     };
@@ -117,6 +118,7 @@ class CellBuild extends React.Component {
                 cell=<td tabIndex="0" onClick={()=>{
                     this.props.clickCell(this.props.date,this.props.month);
                     $(function () {
+                        $('.spacer').css('display','block');
                         $('table.main').css('opacity','.5');
                         $('table.dayEvents').css('display','table');
                     })}} className="holiday"><div tabIndex="0" className={this.props.isNowDate}><p>{this.props.date}</p></div>

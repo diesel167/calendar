@@ -173,6 +173,7 @@ class Builder extends React.Component {
                 <div className="calendar">{this.createTable(this.state.dataState)}</div>
                 <br/>
                 <button className="deleteAllEv" onClick={this.clearLocalStorage}>DELETE ALL EVENTS</button>
+
                 <DayEventBuilder day={this.state.day}
                                  month={this.state.month+1}
                                  transit={this.transit}

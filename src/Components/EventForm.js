@@ -6,6 +6,13 @@ let i=false;   //helper variable to getDerivedStateFromProps work only once,and 
                 // and will !==props.timeStart (condition in  getDerivedStateFromProps)
 let checked=''; //helper for checkbox
 
+let afterAlert=true;  //hide form after 'submit' click as default
+
+//do 00:00 format for 1:00..9:00
+function addZero(n) {
+    return n.length > 4 ? n : '0' + n ;
+}
+
 class EventForm extends React.Component {
     monthName;
     constructor() {
@@ -15,6 +22,7 @@ class EventForm extends React.Component {
             time1:'00:00',
             time2:'00:00',
             disabled:false,
+            afterAlert:true //hide form after 'submit' click as default
         };
         this.onTaskChange = this.onTaskChange.bind(this);
         this.onTime1Change = this.onTime1Change.bind(this);
@@ -29,12 +37,13 @@ class EventForm extends React.Component {
             i=true;
             return {
                 time1: props.timeStart,   //set time1, time2 state
-                time2: props.timeStart
-            };
+                time2: addZero(parseInt(props.timeStart.substring(0,props.timeStart.length-3))+1+":00")
+            }
         }
         // Return null to indicate no change to state.
         return null;
     }
+
 
 
     checkbox(){
@@ -66,15 +75,18 @@ class EventForm extends React.Component {
                 }
             }
         });
-        //check for min 1 hour length of event
-        if(parseInt(this.state.time2)===parseInt(this.state.time1)){
+        //check for min 1 hour length of event and time 2>time1
+        if(parseInt(this.state.time2)<=parseInt(this.state.time1)){
             if(this.state.disabled===false){
-                alert('You need create min 1 hour event');
+                afterAlert=false;
+                alert('Check the time');
                 ifValid=false;
                 this.setState({task:''});  //clear task field
             }
         }
 
+        console.log("time2 =  "+parseInt(this.state.time2));
+        console.log("time1 =  "+parseInt(this.state.time1));
         if (ifValid){
             let el ={
                 day:this.props.day,
@@ -93,6 +105,8 @@ class EventForm extends React.Component {
         }
         event.preventDefault();
     }
+
+
 
     onTaskChange(event){
         this.setState({task: event.target.value});
@@ -130,6 +144,7 @@ class EventForm extends React.Component {
                     this.setState({task:''});  //clear task field
                     i=false;   //set to default i variable
                     $(function () {
+                        $('.dayEvents').css('zIndex','4');
                         $('table').css('display', 'table');
                         $('.form').css('display', 'none');
                         $('table.dayEvents').css('opacity','1');
@@ -138,7 +153,7 @@ class EventForm extends React.Component {
                 }}>&larr;</button>
                 <h1>Create task</h1>
                 <form onSubmit={this.onSubmit}>
-                    <p>
+                    <div>
                         <div className="time_handlers">Time of beginning  </div>
                         <label><input disabled={this.state.disabled} type="time" step="3600" name="time1" value={this.state.time1}
                                      onChange={this.onTime1Change}/></label>
@@ -146,17 +161,20 @@ class EventForm extends React.Component {
                         <div className="time_handlers" >Time of the end  </div>
                         <label><input disabled={this.state.disabled}  type="time" step="3600" name="time2" value={this.state.time2}
                                      onChange={this.onTime2Change}/></label>
-                    </p>
+                    </div>
                     <input type="checkbox" checked={checked} name="allday" value="allday" onChange={this.onDayChange}/> All day <br/>
                     <textarea className="tasktext" name="com" rows="3" onChange={this.onTaskChange}  value={this.state.task}/>
                     <p><input className="submitButton" type="submit" value="Submit" onClick={() => {
                         i=false;   //set to default i variable
-                        $(function () {
-                            $('table').css('display', 'table');
-                            $('.form').css('display', 'none');
-                            $('table.dayEvents').css('opacity','1');
-                            $('table.main').css('opacity','.5');
-                        })}} /></p>
+                        if(afterAlert===true){
+                            $(function () {
+                                $('table').css('display', 'table');
+                                $('.form').css('display', 'none');
+                                $('table.dayEvents').css('opacity','1');
+                                $('table.main').css('opacity','.5');
+                            })
+                        }
+                        }} /></p>
                 </form>
             </div>
         );

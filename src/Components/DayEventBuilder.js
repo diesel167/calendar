@@ -95,8 +95,8 @@ class DayEventBuilder extends React.Component {
                 cells.push(<td onClick={() => {
                     this.selectedTime(i+':00');
                     $(function () {
+                        $('.dayEvents').css('zIndex','2');
                         $('table.main').css('opacity','.3');
-                        $('table.dayEvents').css('opacity','.5');
                         $('.form').css('display', 'block');
                     })
                 }}/>);
@@ -111,6 +111,7 @@ class DayEventBuilder extends React.Component {
             <th><div className='eventDate'><div>{this.props.monthName}</div><div>{this.props.day}</div></div><button onClick={() => {
             this.setState({isSmall:"inCellSmall"});  //reset event blocks to small
             $(function () {
+                $('.spacer').css('display','none');
                 $('table.main').css('opacity','1');    //EXIT button
                 $('table.dayEvents').css('display','none');
             })

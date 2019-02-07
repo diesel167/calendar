@@ -13,6 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <div className="spacer"/>
         <Builder helpDate={helpDate}/>
       </div>
     );
