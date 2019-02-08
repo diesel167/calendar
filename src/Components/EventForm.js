@@ -6,7 +6,6 @@ let i=false;   //helper variable to getDerivedStateFromProps work only once,and 
                 // and will !==props.timeStart (condition in  getDerivedStateFromProps)
 let checked=''; //helper for checkbox
 
-let afterAlert=true;  //hide form after 'submit' click as default
 
 //do 00:00 format for 1:00..9:00
 function addZero(n) {
@@ -78,7 +77,6 @@ class EventForm extends React.Component {
         //check for min 1 hour length of event and time 2>time1
         if(parseInt(this.state.time2)<=parseInt(this.state.time1)){
             if(this.state.disabled===false){
-                afterAlert=false;
                 alert('Check the time');
                 ifValid=false;
                 this.setState({task:''});  //clear task field
@@ -137,7 +135,7 @@ class EventForm extends React.Component {
     render() {
 
         return (
-            <div className="form col-lg-6 col-md-6 col-sm-8 col-xs-8">
+            <div className="form col-lg-6 col-md-6 col-sm-10 col-11">
                 <button onClick={() => {   //EXIT button
                     checked='';  //uncheck the checkbox
                     this.setState({disabled:false}); //set default checkbox
@@ -166,14 +164,13 @@ class EventForm extends React.Component {
                     <textarea className="tasktext" name="com" rows="3" onChange={this.onTaskChange}  value={this.state.task}/>
                     <p><input className="submitButton" type="submit" value="Submit" onClick={() => {
                         i=false;   //set to default i variable
-                        if(afterAlert===true){
-                            $(function () {
-                                $('table').css('display', 'table');
-                                $('.form').css('display', 'none');
-                                $('table.dayEvents').css('opacity','1');
-                                $('table.main').css('opacity','.5');
-                            })
-                        }
+                        $(function () {
+                            $('.dayEvents').css('zIndex','4');
+                            $('table').css('display', 'table');
+                            $('.form').css('display', 'none');
+                            $('table.dayEvents').css('opacity','1');
+                            $('table.main').css('opacity','.5');
+                        })
                         }} /></p>
                 </form>
             </div>

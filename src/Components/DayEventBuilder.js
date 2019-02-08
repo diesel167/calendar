@@ -107,7 +107,7 @@ class DayEventBuilder extends React.Component {
 
         //create table and create exit button from events list
 
-        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-xs-10"><thead><tr><th></th>
+        table.push(<table className="dayEvents col-lg-6 col-md-8 col-sm-10 col-11"><thead><tr><th></th>
             <th><div className='eventDate'><div>{this.props.monthName}</div><div>{this.props.day}</div></div><button onClick={() => {
             this.setState({isSmall:"inCellSmall"});  //reset event blocks to small
             $(function () {

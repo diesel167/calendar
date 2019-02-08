@@ -1,18 +1,18 @@
 body{
-  font:14px;
-  padding-top:20px;
-  position:relative;
+  font-size: 14px;
+  padding-top: 20px;
+  position: relative;
 }
 
 .spacer{
     top:0;
-    position:absolute;
-    width:100vw;
-    height:100vh;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
     background: rgba(65, 65, 65, 0.22);
-    opacity:.5;
-    display:none;
-    z-index:3;
+    opacity: .5;
+    display: none;
+    z-index: 3;
 }
 .scontainer{
     margin:0 5%;
@@ -117,14 +117,18 @@ p.holiday{
 }
 
 button {
-  border-radius:10px;
-  color:#fff;
-  width:25px;
-  border: 0;
-  font-weight:200;
-  text-transform:uppercase;
-  cursor:pointer;
-  text-decoration:none;
+    background-color: #dadada;
+    border-radius: 24px;
+    color: #fff;
+    width: 24px;
+    padding: 0;
+    border: 0;
+    font-weight: 200;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 24px;
 }
 button:hover { background: rgb(53, 167, 110); }
 
@@ -140,10 +144,15 @@ thead{
   width:200px;
 }
 
+.deleteAllEv{
+    padding: 10px;
+    margin-bottom: 5px;
+}
 .form{
   display:none;
   position:absolute;
   top:10%;
+  left:10%;
   background:white;
   box-shadow:0 0 20px 1px black;
   /*height:40%;*/
@@ -163,6 +172,7 @@ table.dayEvents {
     position:absolute;
     top:5%;
     left:10%;
+    width: 85%;
     margin-bottom:50px;
     box-shadow:0 0 20px 1px black;
 
